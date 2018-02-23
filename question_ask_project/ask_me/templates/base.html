@@ -1,0 +1,103 @@
+{% load staticfiles %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <meta name="viewport" content="width=device-width; initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'src/icon.png' %}" type="image/png">
+    <title>Ask me</title>
+    {% block styles %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-size: 30px; font-family: 'Ubuntu Mono'; font-weight: bold" href="/">AskMe</a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <ul class="navbar-form navbar-left search-block">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="search-icon glyphicon glyphicon-search"></i>
+                        </div>
+                        <input type="text" class="form-control search-query">
+                    </div>
+                </ul>
+            </ul>
+
+            <span class="btn  navbar-btn button"><a class="without_underline" href="{% url 'new_ask' %}">ASK!</a></span>
+
+            {% block is_auth %}
+            {% endblock %}
+
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-12">
+                    {% block headerName %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-12 col-md-10">
+            <!--<div class="main">-->
+                <!--{% for i in messages %}-->
+                    <!--<div class="alert alert-danger" role="alert">-->
+                        <!--<p>{{ i }}</p>-->
+                    <!--</div>-->
+                <!--{% endfor %}-->
+            <!--</div>-->
+            {% block content %}
+            {% endblock %}
+        </div>
+
+
+        <div class="col-6 col-md-2 ">
+            <div class="well well-sm">
+                <div class="popular">
+                    <h4>Popular</h4>
+                </div> <hr>
+                    <a class="tag1" href="#">Technopark</a>
+                    <a class="tag2" href="#">Perl</a>
+                    <a class="tag3" href="#">Django</a>
+                    <a class="tag6" href="#">C++</a>
+                    <a class="tag4" href="#">Linux</a>
+                    <a class="tag5" href="#">Algorithms</a>
+                    <a class="tag7" href="#">Go</a>
+                    <a class="tag8" href="#">Python</a>
+            </div>
+
+            <div class="well well-sm">
+                <div class="popular">
+                    <h4>Top People</h4>
+                </div> <hr>
+
+                <ul class="ASDSADSADSADASDSAD">
+                    <li><a class="peo" href="#">Paul Durov</a></li>
+                    <li><a class="peo" href="#">Mark Zuckerberg</a></li>
+                    <li><a class="peo" href="#">Vladimir Putin</a></li>
+                    <li><a class="peo" href="#">Will Smith</a></li>
+                    <li><a class="peo" href="#">Daniel Lee</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% block footer %}
+    {% endblock %}
+
+
+</body>
+</html>

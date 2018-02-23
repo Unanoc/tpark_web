@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+{% endblock %}
+
+{% block headerName %}
+    <h1>Settings: W. Smith</h1>
+{% endblock %}
+
+
+{% block is_auth %}
+    <ul class="navbar-form navbar-right">
+        <div class="text-on-nav">
+            <span class="name-nav">W. Smith</span>
+            <div class="smallctrl">
+                <a href="{% url 'settings' %}">Settings</a>
+                <a href="#">Sign out</a>
+            </div>
+        </div>
+
+        <span class="img-wrap">
+            <a href="#"><img class="avatar-on-nav" src="{% static 'src/dog.jpg' %}"></a>
+        </span>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <form class="form-horizontal" action="#" method="post">
+            {% csrf_token %}
+            <div class="col-md-12">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="login">Login:</label>
+                        <input type="text" class="form-control" id="login">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nick">Nickname:</label>
+                        <input type="text" class="form-control" id="nick">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Repeat password:</label>
+                        <input type="password" class="form-control" id="pwd">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Upload avatar:</label> <br>
+                        <img class="avatar-on-nav" src="{% static 'src/dog.jpg' %}"> <br><br>
+                        <input type="file" name="pic" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-success"/>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+{% endblock %}

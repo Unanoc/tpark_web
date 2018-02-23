@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/question.css' %}">
+{% endblock %}
+
+{% block is_auth %}
+    <ul class="navbar-form navbar-right">
+        <div class="text-on-nav">
+            <span class="name-nav">W. Smith</span>
+            <div class="smallctrl">
+                <a href="{% url 'settings' %}">Settings</a>
+                <a href="#">Sign out</a>
+            </div>
+        </div>
+
+        <span class="img-wrap">
+            <a href="#"><img class="avatar-on-nav" src="{% static 'src/dog.jpg' %}"></a>
+        </span>
+    </ul>
+{% endblock %}
+
+
+{% block content %}
+    <div class="masthead-lead">
+        <div class="media">
+
+              <div class="media-left">
+                <a href="#">
+                  <img src="{% static 'src/dog.jpg' %}" width="70">
+                </a> <br><br>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-thumbs-up"></span> Like  5
+                </button>
+              </div>
+
+              <div class="media-body">
+                  <a><h4 class="media-heading header-ques">To be or not to be?</h4></a>
+                  <small >
+                    <i style="font-size: small">Posted 22.02.2018</i>
+                  </small>
+                  </h4>
+                  <br>
+                  <p><a href="#"></a></p>
+
+                  <p class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
+                  <br>
+                  <span><a>Answer(3)</a></span>
+                  <span class="tags">Tags: <a>bender</a> <a>black-jack</a></span>
+              </div>
+
+        </div>
+        <br>
+        <hr class="masthead-hr">
+    </div>
+
+    <h2>Answers</h2> <br>
+
+    <div class="bor">
+        <div class="masthead-lead">
+            <div class="media">
+
+                  <div class="media-left">
+                    <a href="#">
+                      <img src="{% static 'src/dog.jpg' %}" width="70">
+                    </a> <br><br>
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> Like  5
+                    </button>
+                  </div>
+
+                  <div class="media-body">
+                      <a><h4 class="media-heading header-ques">To be or not to be?</h4></a>
+                      <small >
+                        <i style="font-size: small">Posted 22.02.2018</i>
+                      </small>
+                      </h4>
+                      <br>
+                      <p><a href="#"></a></p>
+
+                      <p class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
+                      <br>
+                      <input type="checkbox"> Correct!
+                  </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="bor">
+        <div class="masthead-lead">
+            <div class="media">
+
+                  <div class="media-left">
+                    <a href="#">
+                      <img src="{% static 'src/dog.jpg' %}" width="70">
+                    </a> <br><br>
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> Like  5
+                    </button>
+                  </div>
+
+                  <div class="media-body">
+                      <a><h4 class="media-heading header-ques">To be or not to be?</h4></a>
+                      <small >
+                        <i style="font-size: small">Posted 22.02.2018</i>
+                      </small>
+                      </h4>
+                      <br>
+                      <p><a href="#"></a></p>
+
+                      <p class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
+                      <br>
+                      <input type="checkbox"> Correct!
+                  </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+    <hr class="masthead-hr">
+
+    <form class="form-horizontal" action="#" method="post">
+        {% csrf_token %}
+        <div class="col-md-12">
+            <fieldset>
+
+                <div class="form-group">
+                    <label for="text">Text:</label>
+                    <textarea name="text_block" cols="40" rows="5" id="text" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Answer!" class="btn btn-success"/>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+
+{% endblock %}

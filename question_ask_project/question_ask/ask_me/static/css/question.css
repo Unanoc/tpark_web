@@ -1,0 +1,23 @@
+.tags {
+    margin-left: 50px;
+}
+
+.img-wrap {
+    margin-right: 15px;
+}
+.text-on-nav {
+    float: right;
+    display: inline-block;
+    height: 34px;
+}
+.avatar-on-nav {
+    height: 34px;
+}
+.name-nav {
+    color: white;
+    font-size: 15px;
+}
+
+.bor {
+    border: 1px solid black;
+}

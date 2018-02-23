@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block headerName %}
+    <h1>Sign In</h1>
+{% endblock %}
+
+{% block is_auth %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
+        <li><a href="{% url 'registration' %}"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block content %}
+    <div class="alert alert-danger" role="alert">
+        <p><strong>Failed!</strong> Passwords does not match.</p>
+    </div>
+
+    <div class="main">
+        <h3>Sign in, please, or <a href="{% url 'registration' %}">register</a></h3> <br>
+        <form class="form-horizontal" action="#" method="post">
+            {% csrf_token %}
+            <div class="col-md-12">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="login">Login:</label>
+                        <input type="email" class="form-control" id="login">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd">
+                    </div>
+
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Remember me</label>
+                    </div> <br>
+
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-success"/>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+{% endblock %}
