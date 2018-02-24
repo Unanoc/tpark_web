@@ -1,6 +1,3 @@
-.img-wrap {
-    margin-right: 15px;
-}
 .text-on-nav {
     float: right;
     display: inline-block;
@@ -13,14 +10,31 @@
     color: white;
     font-size: 15px;
 }
+.dropdown-toggle {
+    text-decoration: none;
+}
+.dropdown-toggle:hover {
+    text-decoration: none;
+}
 
 
 .new {
     text-decoration: none;
+    font-size: 25px;
     color: black;
 }
 .hot {
     font-size: 25px;
+    color: #e71246;
+}
+.new:hover {
+    text-decoration: none;
+    color: #d4d4d4;
+}
+.hot:hover {
+    text-decoration: none;
+    font-size: 25px;
+    color: rgba(255, 19, 77, 0.61);
 }
 
 .media-heading {
@@ -28,5 +42,5 @@
     font-size: 30px;
 }
 .tags {
-    margin-left: 50px;
+    margin-left: 30px;
 }

@@ -4596,12 +4596,12 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
-  color: #b72f40;
+  color: #e71246;
   font-size: 25px;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #cf3548;
+  color: #f31349;
   background-color: transparent;
 }
 .navbar-inverse .navbar-text {

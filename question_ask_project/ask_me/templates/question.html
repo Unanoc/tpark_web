@@ -8,17 +8,21 @@
 
 {% block is_auth %}
     <ul class="navbar-form navbar-right">
-        <div class="text-on-nav">
-            <span class="name-nav">W. Smith</span>
-            <div class="smallctrl">
-                <a href="{% url 'settings' %}">Settings</a>
-                <a href="#">Sign out</a>
-            </div>
-        </div>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <img class="avatar-on-nav" src="{% static 'src/dog.jpg' %}">
+                <span class="name-nav">
+                    W. Smith
+                </span>
+                <span class="caret">
+                </span>
+            </a>
 
-        <span class="img-wrap">
-            <a href="#"><img class="avatar-on-nav" src="{% static 'src/dog.jpg' %}"></a>
-        </span>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'settings' %}">Settings</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
+        </li>
     </ul>
 {% endblock %}
 
@@ -47,7 +51,7 @@
 
                   <p class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
                   <br>
-                  <span><a>Answer(3)</a></span>
+                  <span><a>Answer(2)</a></span>
                   <span class="tags">Tags: <a>bender</a> <a>black-jack</a></span>
               </div>
 
@@ -138,6 +142,7 @@
                 <div class="form-group">
                     <input type="submit" value="Answer!" class="btn btn-success"/>
                 </div>
+
             </fieldset>
         </div>
     </form>

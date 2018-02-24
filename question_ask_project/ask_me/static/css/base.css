@@ -3,36 +3,23 @@ body {
 }
 
 
-.without_underline {
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
+nav ul a .btn:hover {
+    background-color: #1aab16;
 }
-.button {
-    margin-left: 10px;
-}
-nav .btn {
-    background-color: #127910;
-}
-nav .btn:hover {
+nav .btn-success {
+    border-color: #179814;
     background-color: #179814;
 }
-.without_underline:hover {
-    text-decoration: none;
-    color: white;
+.input-group-addon{
+    background-color: #e71246;
+    border: #222;
 }
-
-
-
-.navbar-brand {
-    margin-left: 10px;
+.glyphicon{
+    top: 0px;
 }
-.search-block {
-    margin-left: 10px;
-    margin-right: 10px;
+.glyphicon-search:before {
+    padding-left: 1pt;
 }
-
 
 
 .popular h4{

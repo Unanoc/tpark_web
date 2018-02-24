@@ -1,6 +1,3 @@
-.img-wrap {
-    margin-right: 15px;
-}
 .text-on-nav {
     float: right;
     display: inline-block;
@@ -12,4 +9,10 @@
 .name-nav {
     color: white;
     font-size: 15px;
+}
+.dropdown-toggle {
+    text-decoration: none;
+}
+.dropdown-toggle:hover {
+    text-decoration: none;
 }

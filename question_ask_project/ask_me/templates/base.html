@@ -6,36 +6,46 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <meta name="viewport" content="width=device-width; initial-scale=1">
     <link rel="shortcut icon" href="{% static 'src/icon.png' %}" type="image/png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Ask me</title>
     {% block styles %}
     {% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" style="font-size: 30px; font-family: 'Ubuntu Mono'; font-weight: bold" href="/">AskMe</a>
+        </div>
 
-            <div class="navbar-header">
-                <a class="navbar-brand" style="font-size: 30px; font-family: 'Ubuntu Mono'; font-weight: bold" href="/">AskMe</a>
-            </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
 
-            <ul class="nav navbar-nav">
-                <ul class="navbar-form navbar-left search-block">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon">
-                            <i class="search-icon glyphicon glyphicon-search"></i>
-                        </div>
-                        <input type="text" class="form-control search-query">
-                    </div>
-                </ul>
+          <ul class="nav navbar-nav">
+            <ul class="navbar-form navbar-left">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="search-icon glyphicon glyphicon-search"></i>
+                </div>
+                <input type="text" class="form-control search-query">
+              </div>
             </ul>
+          </ul>
 
-            <span class="btn  navbar-btn button"><a class="without_underline" href="{% url 'new_ask' %}">ASK!</a></span>
-
-            {% block is_auth %}
-            {% endblock %}
+          {% block is_auth %} {% endblock %}
+          <ul class="navbar-form"><a href="{% url 'new_ask' %}"><button type="button" class="btn btn-success">ASK!</button></a></ul>
 
         </div>
+      </div>
     </nav>
+
+
+
 
     <div class="container">
         <div class="page-header">
@@ -48,7 +58,11 @@
         </div>
     </div>
 
+
+
+
     <div class="container">
+
         <div class="col-12 col-md-10">
             <!--<div class="main">-->
                 <!--{% for i in messages %}-->
@@ -94,10 +108,8 @@
 
     </div>
 
-
     {% block footer %}
     {% endblock %}
-
 
 </body>
 </html>

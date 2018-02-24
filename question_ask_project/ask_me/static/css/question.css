@@ -2,9 +2,7 @@
     margin-left: 50px;
 }
 
-.img-wrap {
-    margin-right: 15px;
-}
+
 .text-on-nav {
     float: right;
     display: inline-block;
@@ -17,6 +15,14 @@
     color: white;
     font-size: 15px;
 }
+.dropdown-toggle {
+    text-decoration: none;
+}
+.dropdown-toggle:hover {
+    text-decoration: none;
+}
+
+
 
 .bor {
     border: 1px solid #f2f2f2;
