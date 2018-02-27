@@ -1,0 +1,18 @@
+.text-on-nav {
+    float: right;
+    display: inline-block;
+    height: 34px;
+}
+.avatar-on-nav {
+    height: 34px;
+}
+.name-nav {
+    color: white;
+    font-size: 15px;
+}
+.dropdown-toggle {
+    text-decoration: none;
+}
+.dropdown-toggle:hover {
+    text-decoration: none;
+}

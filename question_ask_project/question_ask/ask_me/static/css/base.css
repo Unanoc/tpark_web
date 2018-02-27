@@ -1,0 +1,83 @@
+body {
+    font-family: "Helvetica";
+}
+
+
+nav ul a .btn:hover {
+    background-color: #1aab16;
+}
+nav .btn-success {
+    border-color: #179814;
+    background-color: #179814;
+}
+.input-group-addon{
+    background-color: #e71246;
+    border: #222;
+}
+.glyphicon{
+    top: 0px;
+}
+.glyphicon-search:before {
+    padding-left: 1pt;
+}
+
+
+.popular h4{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.peo {
+    color: #0f0f0f;
+}
+.tag1 {
+    font-size: 11px;
+    opacity: 0.5;
+    color: #1b6d85;
+}
+.tag2 {
+    font-size: 20px;
+    opacity: 0.9;
+    color: #85253e;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.tag3 {
+    font-size: 14px;
+    opacity: 0.8;
+    color: #3c1685;
+    font-weight: bolder;
+}
+.tag4 {
+    font-size: 26px;
+    opacity: 0.9;
+    color: #bebf0d;
+    font-weight: bolder;
+    margin-left: 5px;
+}
+.tag5 {
+    font-size: 13px;
+    opacity: 0.7;
+    color: #3db55d;
+    margin-left: 6px;
+}
+.tag6 {
+    font-size: 20px;
+    color: #0034c1;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.tag7 {
+    font-size: 20px;
+    opacity: 0.9;
+    color: #85253e;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.tag8 {
+    font-size: 20px;
+    opacity: 0.9;
+    color: #85253e;
+    font-weight: bold;
+    margin-left: 5px;
+}

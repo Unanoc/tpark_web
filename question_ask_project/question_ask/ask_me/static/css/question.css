@@ -1,0 +1,31 @@
+.tags {
+    margin-left: 50px;
+}
+
+
+.text-on-nav {
+    float: right;
+    display: inline-block;
+    height: 34px;
+}
+.avatar-on-nav {
+    height: 34px;
+}
+.name-nav {
+    color: white;
+    font-size: 15px;
+}
+.dropdown-toggle {
+    text-decoration: none;
+}
+.dropdown-toggle:hover {
+    text-decoration: none;
+}
+
+
+
+.bor {
+    border: 1px solid #f2f2f2;
+    padding: 20px;
+    border-radius: 7px;
+}
