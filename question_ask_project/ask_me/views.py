@@ -10,7 +10,7 @@ def main(request):
 
 def feed(request):
 	questions = []
-	for i in range(1, 61):
+	for i in range(1, 60):
 		questions.append({
 			'id': i,
 			'title': 'Вопрос №' + str(i),
