@@ -44,3 +44,12 @@
 .tags {
     margin-left: 30px;
 }
+
+
+.tag-header {
+    color: black;
+}
+.tag-header:hover {
+    color: black;
+    text-decoration: none;
+}
