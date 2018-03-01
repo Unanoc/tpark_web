@@ -36,20 +36,20 @@
                   <img src="{% static 'src/dog.jpg' %}" width="70">
                 </a> <br><br>
                 <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-thumbs-up"></span> Like  5
+                    <span class="glyphicon glyphicon-thumbs-up"></span> Like  {{ question.id }}
                 </button>
               </div>
 
               <div class="media-body">
-                  <a><h4 class="media-heading header-ques">To be or not to be?</h4></a>
+                  <a><h4 class="media-heading header-ques">{{ question.title }}</h4></a>
                   <small >
-                    <i style="font-size: small">Posted 22.02.2018</i>
+                    <i style="font-size: small">22.02.2018</i>
                   </small>
                   </h4>
                   <br>
                   <p><a href="#"></a></p>
 
-                  <p class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </p>
+                  <p class="content">{{ question.content }}</p>
                   <br>
                   <span><a>Answer(2)</a></span>
                   <span class="tags">Tags: <a>bender</a> <a>black-jack</a></span>
@@ -76,9 +76,8 @@
                   </div>
 
                   <div class="media-body">
-                      <a><h4 class="media-heading header-ques">To be or not to be?</h4></a>
                       <small >
-                        <i style="font-size: small">Posted 22.02.2018</i>
+                        <i style="font-size: small">22.02.2018</i>
                       </small>
                       </h4>
                       <br>
@@ -111,7 +110,7 @@
                   <div class="media-body">
                       <a><h4 class="media-heading header-ques">To be or not to be?</h4></a>
                       <small >
-                        <i style="font-size: small">Posted 22.02.2018</i>
+                        <i style="font-size: small">22.02.2018</i>
                       </small>
                       </h4>
                       <br>

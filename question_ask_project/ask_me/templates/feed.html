@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/feed.css' %}">
+{% endblock %}
+
+
+{% block headerName %}
+        <h3>
+            {% for header in headers %}
+                <a class="{{ header.class }}" href="{% url header.url %}" >{{ header.title }}</a>
+            {% endfor %}
+        </h3>
+{% endblock %}
+
+
+{% block is_auth %}
+    <ul class="navbar-form navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <img class="avatar-on-nav" src="{% static 'src/dog.jpg' %}">
+                <span class="name-nav">
+                    W. Smith
+                </span>
+                <span class="caret">
+                </span>
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'settings' %}">Settings</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block content %}
+
+    {% for question in questions %}
+        <div class="masthead-lead">
+            <div class="media">
+
+              <div class="media-left">
+                <a href="#">
+                  <img src="{% static 'src/dog.jpg' %}" width="70">
+                </a> <br><br>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-thumbs-up"></span> Like  {{ question.id }}
+                </button>
+              </div>
+
+              <div class="media-body">
+                  <a href="{% url 'question' question.id %}"><h4 class="media-heading header-ques">{{ question.title }}</h4></a>
+                  <small >
+                    <i style="font-size: small">Posted 22.02.2018</i>
+                  </small>
+                  </h4>
+                  <br>
+
+                  <p class="content">{{ question.content }}</p>
+                  <br>
+                  <span><a>Answer(3)</a></span>
+                  <span class="tags">Tags: <a>bender</a> <a>black-jack</a></span>
+              </div>
+
+            </div>
+            <br>
+            <hr class="masthead-hr">
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+{% block footer %}
+    <div class="container">
+          <ul class="pagination">
+            {% if questions.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ questions.previous_page_number }}">Back</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item active">
+                <a class="page-link" href="#">{{ questions.number }} <span class="sr-only">(current)</span></a>
+            </li>
+
+            {% if questions.has_next %}
+                <li class="page-item"><a class="page-link"
+                                         href="?page={{ questions.next_page_number }}">{{ questions.next_page_number }}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ questions.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#"">Next</a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </div>
+{% endblock %}
