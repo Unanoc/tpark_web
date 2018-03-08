@@ -1,0 +1,5 @@
+[client]
+database = ask_me
+user = django
+password = TrfnthbyfLfybbk
+default-character-set = utf8
