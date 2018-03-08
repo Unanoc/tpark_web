@@ -77,8 +77,10 @@ WSGI_APPLICATION = 'question_ask_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '../question_ask_project/config.cnf'
+        },
     }
 }
 
@@ -115,4 +117,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'question_ask/ask_me/static/'
+STATIC_ROOT = 'ask_me/static/'
