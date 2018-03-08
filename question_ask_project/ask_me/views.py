@@ -54,7 +54,9 @@ def tag(request):
 		questions.append({
 			'id': i,
 			'title': 'Вопрос №' + str(i),
-			'content': 'Examination of a sample of full texts of stories on disarmament with reference to the United Nations filed in May and August 1998 shows that only 10 per cent of stories covered substantive aspects of the work of the United Nations.'
+			'content': 'Examination of a sample of full texts of stories on disarmament with reference '
+                       'to the United Nations filed in May and August 1998 shows that only 10 per cent of '
+                       'stories covered substantive aspects of the work of the United Nations.'
 		})
 
 	tag_name = 'bender'
@@ -96,7 +98,9 @@ def question(request, question_id):
 	question = {
 		'id': question_id,
 		'title': 'Вопрос №' + str(question_id),
-		'content': 'Examination of a sample of full texts of stories on disarmament with reference to the United Nations filed in May and August 1998 shows that only 10 per cent of stories covered substantive aspects of the work of the United Nations.'
+		'content': 'Examination of a sample of full texts of stories on disarmament with reference '
+                   'to the United Nations filed in May and August 1998 shows that only 10 per cent of '
+                   'stories covered substantive aspects of the work of the United Nations.'
 	}
 
 	return render(request, 'question.html', {'question': question})
