@@ -9,7 +9,10 @@
     height: 34px;
 }
 .avatar-on-nav {
+    object-fit: cover;
+    width: 34px;
     height: 34px;
+    border-radius: 50%;
 }
 .name-nav {
     color: white;
@@ -22,7 +25,12 @@
     text-decoration: none;
 }
 
-
+.avatar-on-ques {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
 
 .bor {
     border: 1px solid #f2f2f2;

@@ -4,7 +4,10 @@
     height: 34px;
 }
 .avatar-on-nav {
+    object-fit: cover;
+    width: 34px;
     height: 34px;
+    border-radius: 50%;
 }
 .name-nav {
     color: white;

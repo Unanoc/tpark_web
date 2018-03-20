@@ -4,7 +4,10 @@
     height: 34px;
 }
 .avatar-on-nav {
+    object-fit: cover;
+    width: 34px;
     height: 34px;
+    border-radius: 50%;
 }
 .name-nav {
     color: white;
@@ -37,19 +40,30 @@
     color: rgba(255, 19, 77, 0.61);
 }
 
+
 .media-heading {
     color: black;
     font-size: 30px;
 }
-.tags {
-    margin-left: 30px;
+
+.avatar-on-ques {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }
 
-
-.tag-header {
-    color: black;
+.btn-danger {
+    background-color: #e71246;
+    border: 1px solid #e71246;
 }
-.tag-header:hover {
-    color: black;
+
+.btn-danger:hover{
+    background-color: #b10e36;
+    border: 1px solid #b10e36;
+}
+
+.btn-danger a {
     text-decoration: none;
+    color: white;
 }

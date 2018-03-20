@@ -43,12 +43,12 @@
             <div class="media">
 
               <div class="media-left">
-                <a href="#">
-                  <img src="{% static 'src/dog.jpg' %}" width="70">
-                </a> <br><br>
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-thumbs-up"></span> Like  {{ question.id }}
-                </button>
+                  <a href="#">
+                     <img src="{% static 'src/dog.jpg' %}" class="avatar-on-ques">
+                  </a> <br><br>
+                  <button type="button" class="btn btn-default btn-sm">
+                         <span class="glyphicon glyphicon-comment"> 12</span>
+                  </button>
               </div>
 
               <div class="media-body">
@@ -61,8 +61,22 @@
 
                   <p class="content">{{ question.content }}</p>
                   <br>
-                  <span><a>Answer(3)</a></span>
-                  <span class="tags">Tags: <a>bender</a> <a>black-jack</a></span>
+
+
+                  <span>
+                      <button type="button" class="btn btn-danger btn-xs"><a>#black-jack</a></button>
+                      <button type="button" class="btn btn-danger btn-xs"><a>#bender</a></button>
+                  </span>
+
+                  <span style="float: right">
+                      <button type="button" class="btn btn-default btn-sm">
+                         <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.id }}
+                      </button>
+
+                      <button type="button" class=" btn btn-default btn-sm">
+                         <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.id }}
+                      </button>
+                  </span>
               </div>
 
             </div>
