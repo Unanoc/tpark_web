@@ -2,9 +2,8 @@
 {% load static %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/feed.css' %}">
+    <link rel="stylesheet" href="{% static 'css/questions.css' %}">
 {% endblock %}
-
 
 {% block headerName %}
         <h3>
@@ -14,7 +13,6 @@
         </h3>
 {% endblock %}
 
-
 {% block is_auth %}
     <ul class="navbar-form navbar-right">
         <li class="dropdown">
@@ -23,18 +21,16 @@
                 <span class="name-nav">
                     W. Smith
                 </span>
-                <span class="caret">
-                </span>
+                <span class="caret"></span>
             </a>
 
             <ul class="dropdown-menu">
-              <li><a href="{% url 'settings' %}">Settings</a></li>
-              <li><a href="#">Sign out</a></li>
+                <li><a href="{% url 'settings' %}">Settings</a></li>
+                <li><a href="#">Sign out</a></li>
             </ul>
         </li>
     </ul>
 {% endblock %}
-
 
 {% block content %}
 
@@ -42,41 +38,41 @@
         <div class="masthead-lead">
             <div class="media">
 
-              <div class="media-left">
-                  <a href="#">
-                     <img src="{% static 'src/dog.jpg' %}" class="avatar-on-ques">
-                  </a> <br><br>
-                  <button type="button" class="btn btn-default btn-sm">
-                         <span class="glyphicon glyphicon-comment"> 12</span>
-                  </button>
-              </div>
+                <div class="media-left">
+                    <a href="#">
+                        <img src="{% static 'src/dog.jpg' %}" class="avatar-on-post">
+                    </a> <br><br>
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-comment"> 12</span>
+                    </button>
+                </div>
 
-              <div class="media-body">
-                  <a href="{% url 'question' question.id %}"><h4 class="media-heading header-ques">{{ question.title }}</h4></a>
-                  <small >
-                    <i style="font-size: small">Posted 22.02.2018</i>
-                  </small>
-                  </h4>
-                  <br>
+                <div class="media-body">
+                    <a href="{% url 'question' question.id %}"><h4 class="media-heading">{{ question.title }}</h4></a>
+                    <small >
+                        <i style="font-size: small; font-weight: bold">W. Smith</i>
+                        <i style="font-size: small">Posted 22.02.2018</i>
+                    </small>
+                    <br><br>
 
-                  <p class="content">{{ question.content }}</p>
-                  <br>
+                    <p class="content">{{ question.content }}</p>
+                    <br>
 
 
-                  <span>
-                      <button type="button" class="btn btn-danger btn-xs"><a>#black-jack</a></button>
-                      <button type="button" class="btn btn-danger btn-xs"><a>#bender</a></button>
-                  </span>
+                    <span>
+                        <button type="button" class="btn btn-danger btn-xs"><a>#black-jack</a></button>
+                        <button type="button" class="btn btn-danger btn-xs"><a>#bender</a></button>
+                    </span>
 
-                  <span style="float: right">
-                      <button type="button" class="btn btn-default btn-sm">
-                         <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.id }}
-                      </button>
+                    <span style="float: right">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.id }}
+                        </button>
 
-                      <button type="button" class=" btn btn-default btn-sm">
-                         <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.id }}
-                      </button>
-                  </span>
+                        <button type="button" class=" btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.id }}
+                        </button>
+                    </span>
               </div>
 
             </div>
@@ -87,39 +83,39 @@
 
 {% endblock %}
 
-
 {% block footer %}
     <div class="container">
           <ul class="pagination">
-            {% if questions.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ questions.previous_page_number }}">Back</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Back</a>
-                </li>
-            {% endif %}
+              {% if questions.has_previous %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ questions.previous_page_number }}">Back</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">Back</a>
+                  </li>
+              {% endif %}
 
-            <li class="page-item active">
-                <a class="page-link" href="#">{{ questions.number }} <span class="sr-only">(current)</span></a>
-            </li>
+              <li class="page-item active">
+                  <a class="page-link" href="#">{{ questions.number }} <span class="sr-only">(current)</span></a>
+              </li>
 
-            {% if questions.has_next %}
-                <li class="page-item"><a class="page-link"
+              {% if questions.has_next %}
+                  <li class="page-item">
+                      <a class="page-link"
                                          href="?page={{ questions.next_page_number }}">{{ questions.next_page_number }}</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ questions.next_page_number }}">Next</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            {% endif %}
-
-        </ul>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ questions.next_page_number }}">Next</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#">Next</a>
+                  </li>
+              {% endif %}
+          </ul>
     </div>
 {% endblock %}

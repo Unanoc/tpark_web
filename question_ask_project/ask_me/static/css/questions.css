@@ -1,0 +1,47 @@
+/* Questions */
+
+.new {
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+}
+.hot {
+    font-size: 25px;
+    color: #e71246;
+}
+.new:hover {
+    text-decoration: none;
+    color: #d4d4d4;
+}
+.hot:hover {
+    text-decoration: none;
+    font-size: 25px;
+    color: rgba(255, 19, 77, 0.61);
+}
+.avatar-on-post {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.btn-danger {
+    background-color: #e71246;
+    border: 1px solid #e71246;
+}
+.btn-danger:hover{
+    background-color: #b10e36;
+    border: 1px solid #b10e36;
+}
+.btn-danger a {
+    text-decoration: none;
+    color: white;
+}
+.media-heading {
+    color: black;
+    font-size: 30px;
+}
+.bor {
+    border: 1px solid #f2f2f2;
+    padding: 20px;
+    border-radius: 7px;
+}

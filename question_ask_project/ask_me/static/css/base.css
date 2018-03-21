@@ -2,6 +2,7 @@ body {
     font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
+
 /* For navbar */
 nav ul a .btn:hover {
     background-color: #1aab16;
@@ -21,8 +22,31 @@ nav .btn-success {
     padding-left: 1pt;
 }
 
-/* For right-side menu */
 
+.text-on-nav {
+    float: right;
+    display: inline-block;
+    height: 34px;
+}
+.avatar-on-nav {
+    object-fit: cover;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+.name-nav {
+    color: white;
+    font-size: 15px;
+}
+.dropdown-toggle {
+    text-decoration: none;
+}
+.dropdown-toggle:hover {
+    text-decoration: none;
+}
+
+
+/* For right-side menu */
 .popular h4{
     text-align: center;
     font-size: 30px;
@@ -81,21 +105,4 @@ nav .btn-success {
     color: #85253e;
     font-weight: bold;
     margin-left: 5px;
-}
-
-/* For questions */
-
-.btn-danger {
-    background-color: #e71246;
-    border: 1px solid #e71246;
-}
-
-.btn-danger:hover{
-    background-color: #b10e36;
-    border: 1px solid #b10e36;
-}
-
-.btn-danger a {
-    text-decoration: none;
-    color: white;
 }
