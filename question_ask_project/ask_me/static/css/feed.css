@@ -52,18 +52,3 @@
     height: 70px;
     border-radius: 50%;
 }
-
-.btn-danger {
-    background-color: #e71246;
-    border: 1px solid #e71246;
-}
-
-.btn-danger:hover{
-    background-color: #b10e36;
-    border: 1px solid #b10e36;
-}
-
-.btn-danger a {
-    text-decoration: none;
-    color: white;
-}
