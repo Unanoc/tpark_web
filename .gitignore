@@ -1,4 +1,5 @@
-venv
+venv/
 .idea/
-question_ask_project/ask_me/__pycache__
+__pycache__/
 config.cnf
+
