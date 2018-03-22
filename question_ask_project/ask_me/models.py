@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
+from django.contrib.contenttypes.models import ContentType
+
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 from ask_me.managers import *
 
@@ -30,13 +33,23 @@ class Tag(models.Model):
 
 
 
+class Like(models.Model):
+    user = models.ForeignKey(User, verbose_name="Like's Author")
+    is_liked = models.BooleanField()
+    content_type = models.ForeignKey(ContentType, default=None, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username + " liked"
+
 
 class Question(models.Model):
     author = models.ForeignKey(User, verbose_name="Question's Owner")
     title = models.CharField(max_length=50, verbose_name="Question's Header")
     text = models.TextField(verbose_name="Question's Content")
     date = models.DateTimeField(default=timezone.now, verbose_name="Question's Date")
-    tags = models.ManyToManyField(Tag, related_name="question", blank=True, verbose_name="Question's Tags") #blank=True means Field can be empty (defalt value is False)
     rating = models.IntegerField(default=0, null=False, verbose_name="Question's Rating")
     is_active = models.BooleanField(default=True, verbose_name="Question's Availability")
 
@@ -60,10 +73,3 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
-
-
-
-
-# class Like():
-#
-#     pass
