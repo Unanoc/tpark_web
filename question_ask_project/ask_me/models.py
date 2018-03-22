@@ -1,60 +1,69 @@
-# from django.db import models
-# from django.utils import timezone
-# from django.contrib.auth.models import AbstractUser
-#
-# from ask_me.managers import *
-#
-#
-#
-#
-# class User(AbstractUser):
-#     pass
-#
-#
-#
-#
-# class Tag(models.Model):
-#     name = models.CharField(max_length=20, default="404", verbose_name="Question's tag")
-#
-#     objects = TagManager()
-#
-#     def __str__(self):
-#         return self.title
-#
-#
-#
-# class Question(models.Model):
-#     author = models.ForeignKey(User, verbose_name="Question's owner")
-#     title = models.CharField(max_length=50, verbose_name="Question's Header")
-#     text = models.TextField(verbose_name="Question's Content")
-#     date = models.DateTimeField(default=timezone.now(), verbose_name="Question's Date")
-#     tags = models.ManyToManyField(Tag, related_name="question", blank=True, verbose_name="Question's Tags") #blank=True means Field can be empty (defalt value is False)
-#     rating = models.IntegerField(default=0, null=False, verbose_name="Question's Rating")
-#     is_active = models.BooleanField(default=True, verbose_name="Question's Availability")
-#
-#     objects = QuestionManager()
-#
-#     def __str__(self):
-#         return self.title
-#
-#
-#
-# class Answer(models.Model):
-#         author = models.ForeignKey(User, verbose_name="Answer's Owner")
-#         date = models.DateTimeField(default=timezone.now(), verbose_name="Answer's Date")
-#
-#         question = models.ForeignKey(Question, verbose_name="Answer's Question")
-#         text = models.TextField(verbose_name="Answer's Content")
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
+
+from ask_me.managers import *
+
+
+
+# AUTH_USER_MODEL set in settings
+class User(AbstractUser):
+    upload = models.ImageField(default="src/default_avatar.png", upload_to="uploads/%Y/%m/%d/", verbose_name="User's Avatar")
+    registration_date = models.DateTimeField(default=timezone.now, verbose_name="User's Registration Date")
+    rating = models.IntegerField(default=0, verbose_name="User's Rating")
+
+    objects = UserManager()
+
+    def __str__(self):
+        return self.username
+
+
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=20, default="404", verbose_name="Question's Tag")
+
+    objects = TagManager()
+
+    def __str__(self):
+        return self.title
+
+
+
+
+class Question(models.Model):
+    author = models.ForeignKey(User, verbose_name="Question's Owner")
+    title = models.CharField(max_length=50, verbose_name="Question's Header")
+    text = models.TextField(verbose_name="Question's Content")
+    date = models.DateTimeField(default=timezone.now, verbose_name="Question's Date")
+    tags = models.ManyToManyField(Tag, related_name="question", blank=True, verbose_name="Question's Tags") #blank=True means Field can be empty (defalt value is False)
+    rating = models.IntegerField(default=0, null=False, verbose_name="Question's Rating")
+    is_active = models.BooleanField(default=True, verbose_name="Question's Availability")
+
+    objects = QuestionManager()
+
+    def __str__(self):
+        return self.text
+
+
+
+
+class Answer(models.Model):
+    author = models.ForeignKey(User, verbose_name="Answer's Owner")
+    date = models.DateTimeField(default=timezone.now, verbose_name="Answer's Date")
+
+    question = models.ForeignKey(Question, verbose_name="Answer's Question")
+    text = models.TextField(verbose_name="Answer's Content")
+    rating = models.IntegerField(default=0, null=False, verbose_name="Answer's Rating")
+
+    objects = AnswerManager()
+
+    def __str__(self):
+        return self.text
+
+
+
+
 # class Like():
+#
 #     pass
