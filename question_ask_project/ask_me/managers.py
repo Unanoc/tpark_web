@@ -29,7 +29,7 @@ class AnswerManager(models.Manager):
 class TagManager(models.Manager):
 
     def get_by_tag(self, tag_name):
-        return self.filter(title=tag_name).first().questions.all().order_by('date').reverse()
+        return self.filter(name=tag_name).first().questions.all().order_by('date').reverse()
 
 
 class LikeManager(models.Manager):

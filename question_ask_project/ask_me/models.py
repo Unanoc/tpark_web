@@ -2,10 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
-
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 from ask_me.managers import *
+
 
 
 
@@ -52,7 +52,7 @@ class Question(models.Model):
     date = models.DateTimeField(default=timezone.now, verbose_name="Question's Date")
     rating = models.IntegerField(default=0, null=False, verbose_name="Question's Rating")
     is_active = models.BooleanField(default=True, verbose_name="Question's Availability")
-
+    tags = models.ManyToManyField(Tag, related_name='questions', blank=True, verbose_name="Question's Tags")
     objects = QuestionManager()
 
     def __str__(self):
