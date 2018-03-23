@@ -52,16 +52,14 @@
                     </small>
                     <br><br>
 
-                    <p class="content">{{ question.text }}</p>
+                    <p class="content">{{ question.text | truncatechars:300 }}</p>
                     <br>
 
                     {% for tag in question.tags.all %}
-                        <span>
-                            <button type="button" class="btn btn-danger btn-xs"><a href="{% url 'tag' tag.name %}">{{ tag.name }}</a></button>
-                        </span>
+                        <button type="button" class="btn btn-danger btn-xs"><a href="{% url 'tag' tag.name %}">{{ tag.name }}</a></button>
                     {% endfor %}
 
-                    <span style="float: right">
+                    <div class="likes">
                         <button type="button" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.rating }}
                         </button>
@@ -69,7 +67,7 @@
                         <button type="button" class=" btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.rating }}
                         </button>
-                    </span>
+                    </div>
               </div>
 
             </div>

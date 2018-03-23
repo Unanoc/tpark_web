@@ -52,7 +52,7 @@
 }
 .media-heading {
     color: black;
-    font-size: 27px;
+    font-size: 23px;
 }
 .bor {
     border: 1px solid #f2f2f2;
@@ -60,5 +60,9 @@
     border-radius: 7px;
 }
 .content {
-    font-size: 18px;
+    font-size: 15px;
+}
+.likes {
+    margin-top: 10px;
+    float: right;
 }
