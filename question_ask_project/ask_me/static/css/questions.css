@@ -18,6 +18,20 @@
     font-size: 25px;
     color: rgba(255, 19, 77, 0.61);
 }
+.tag-header {
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    border: 1px solid #e71246;
+    background-color: #e71246;
+    padding: 8px;
+    border-radius: 8px;
+}
+.tag-header:hover {
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+}
 .avatar-on-post {
     object-fit: cover;
     width: 70px;
@@ -38,7 +52,7 @@
 }
 .media-heading {
     color: black;
-    font-size: 30px;
+    font-size: 27px;
 }
 .bor {
     border: 1px solid #f2f2f2;

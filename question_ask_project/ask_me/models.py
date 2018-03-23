@@ -53,6 +53,7 @@ class Question(models.Model):
     rating = models.IntegerField(default=0, null=False, verbose_name="Question's Rating")
     is_active = models.BooleanField(default=True, verbose_name="Question's Availability")
     tags = models.ManyToManyField(Tag, related_name='questions', blank=True, verbose_name="Question's Tags")
+
     objects = QuestionManager()
 
     def __str__(self):
@@ -64,8 +65,7 @@ class Question(models.Model):
 class Answer(models.Model):
     author = models.ForeignKey(User, verbose_name="Answer's Owner")
     date = models.DateTimeField(default=timezone.now, verbose_name="Answer's Date")
-
-    question = models.ForeignKey(Question, verbose_name="Answer's Question")
+    question = models.ForeignKey(Question, related_name='answers', verbose_name="Answer's Question")
     text = models.TextField(verbose_name="Answer's Content")
     rating = models.IntegerField(default=0, null=False, verbose_name="Answer's Rating")
 

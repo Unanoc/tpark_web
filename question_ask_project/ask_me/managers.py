@@ -22,8 +22,8 @@ class QuestionManager(models.Manager):
 
 class AnswerManager(models.Manager):
 
-    def get_answers(self):
-        return self.all().order_by('date').reverse()
+    def get_answers_hot(self):
+        return self.all().order_by('rating').reverse()
 
 
 class TagManager(models.Manager):

@@ -30,34 +30,35 @@
 
             <div class="media-left">
                 <a href="#">
-                    <img src="{% static 'src/dog.jpg' %}" class="avatar-on-post">
+                    <img src="{% static question.author.upload %}" class="avatar-on-post">
                 </a>
             </div>
 
             <div class="media-body">
                 <a href="{% url 'question' question.id %}"><h4 class="media-heading">{{ question.title }}</h4></a>
                 <small >
-                    <i style="font-size: small; font-weight: bold">W. Smith</i>
-                    <i style="font-size: small">Posted 22.02.2018</i>
+                    <i style="font-size: small; font-weight: bold">{{ question.author.first_name}} {{ question.author.last_name }}</i>
+                    <i style="font-size: small">Posted {{ question.date }}</i>
                 </small>
                 <br><br>
 
-                <p class="content">{{ question.content }}</p>
+                <p class="content">{{ question.text }}</p>
                 <br>
 
 
-                <span>
-                    <button type="button" class="btn btn-danger btn-xs"><a>#black-jack</a></button>
-                    <button type="button" class="btn btn-danger btn-xs"><a>#bender</a></button>
-                </span>
+                {% for tag in question.tags.all %}
+                        <span>
+                            <button type="button" class="btn btn-danger btn-xs"><a href="{% url 'tag' tag.name %}">{{ tag.name }}</a></button>
+                        </span>
+                {% endfor %}
 
                 <span style="float: right">
                     <button type="button" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.id }}
+                        <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.rating }}
                     </button>
 
                     <button type="button" class=" btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.id }}
+                        <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.rating }}
                     </button>
                 </span>
             </div>
@@ -69,39 +70,41 @@
 
     <h2>Answers</h2> <br>
 
-    <div class="masthead-lead">
-        <div class="media">
+    {% for answer in question.answers.get_answers_hot %}
+        <div class="masthead-lead">
+            <div class="media">
 
-            <div class="media-left">
-                <a href="#">
-                    <img src="{% static 'src/dog.jpg' %}" class="avatar-on-post">
-                </a>
-            </div>
+                <div class="media-left">
+                    <a href="#">
+                        <img src="{% static question.author.upload %}" class="avatar-on-post">
+                    </a>
+                </div>
 
-            <div class="media-body">
-                <small >
-                    <i style="font-size: small; font-weight: bold">W. Smith</i>
-                    <i style="font-size: small">Posted 22.02.2018</i>
-                </small>
-                <br><br>
+                <div class="media-body">
+                    <small >
+                        <i style="font-size: small; font-weight: bold">{{ answer.author.first_name}} {{ answer.author.last_name }}</i>
+                        <i style="font-size: small">Posted {{ answer.date }}</i>
+                    </small>
+                    <br><br>
 
-                <p class="content">{{ question.content }}</p>
-                <br>
+                    <p class="content">{{ answer.text }}</p>
+                    <br>
 
-                <span style="float: right">
-                    <button type="button" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.id }}
-                    </button>
+                    <span style="float: right">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> {{ answer.rating }}
+                        </button>
 
-                    <button type="button" class=" btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.id }}
-                    </button>
-                </span>
+                        <button type="button" class=" btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-thumbs-down"></span> {{ answer.rating }}
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <br><hr class="masthead-hr">
+        <br><hr class="masthead-hr">
+    {% endfor %}
 
     <form class="form-horizontal" action="#" method="post">
         {% csrf_token %}

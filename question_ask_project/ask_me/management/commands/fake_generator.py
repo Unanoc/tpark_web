@@ -28,6 +28,7 @@ class Command(BaseCommand):
             first_name, last_name = faker.name().split(' ')
             user.first_name = first_name
             user.last_name = last_name
+            user.rating = random.randint(1, 100)
             user.save()
             list_of_users.append(user)
         return list_of_users
@@ -57,13 +58,14 @@ class Command(BaseCommand):
             user = random.choice(users)
             question = Question.objects.create(author=user)
 
-            question.title = faker.sentence()
-            question.text = faker.text()
             for tag in range(3):
                 tag = random.choice(tags)
                 question.tags.add(tag)
-            question.date = timezone.now()
-            question.save
+
+            question.title = faker.sentence()[:random.randint(15,50)]
+            question.text = faker.text()
+            question.rating = random.randint(1, 100)
+            question.save()
             list_of_questions.append(question)
         return list_of_questions
 
@@ -79,6 +81,5 @@ class Command(BaseCommand):
             answer = Answer.objects.create(author=user, question=question)
 
             answer.text = faker.text()
-            answer.date = timezone.now()
-
+            answer.rating = random.randint(1, 100)
             answer.save()
