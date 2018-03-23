@@ -10,7 +10,7 @@ def main(request):
 
 
 def feed(request):
-	questions = render_paginator(request, objects_list=Question.objects.get_new())
+	questions = paginator(request, objects_list=Question.objects.get_new())
 	content_header = [
 		{'title': 'New Questions', 'url': 'feed', 'is_active': True},
 		{'title': 'Hot Questions', 'url': 'hot', 'is_active': False}
@@ -22,7 +22,7 @@ def feed(request):
 
 
 def hot(request):
-	questions = render_paginator(request, objects_list=Question.objects.get_hot())
+	questions = paginator(request, objects_list=Question.objects.get_hot())
 	content_header = [
 		{'title': 'New Questions', 'url': 'feed', 'is_active': False},
 		{'title': 'Hot Questions', 'url': 'hot', 'is_active': True}
@@ -34,7 +34,7 @@ def hot(request):
 
 
 def tag(request, tag):
-	questions = render_paginator(request, objects_list=Tag.objects.get_by_tag(tag_name=tag))
+	questions = paginator(request, objects_list=Tag.objects.get_by_tag(tag_name=tag))
 	content_header = [
 		{'title': 'Tag: ' + tag, 'url': 'feed', 'is_active': True},
 	]
@@ -46,13 +46,14 @@ def tag(request, tag):
 
 def question(request, question_id):
 	question = Question.objects.get_by_id(int(question_id)).first()
+	answers = paginator(request, Answer.objects.get_answers_hot(question.id))
 	if question is not None:
-		return render(request, 'question.html', {'question': question})
+		return render(request, 'question.html', {'question': question, 'answers': answers})
 	else:
 		raise Http404
 
 
-def render_paginator(request, objects_list):
+def paginator(request, objects_list):
 	paginator = Paginator(objects_list, 20)  # Show 20 contacts per page
 
 	page = request.GET.get('page')
@@ -70,12 +71,10 @@ def render_paginator(request, objects_list):
 
 
 
-
+#TODO
 
 def login(request):
 	return HttpResponse(render_to_string('login.html'))
-
-
 
 def logout(request):
 	return redirect('feed')

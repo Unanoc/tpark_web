@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 import random
-from django.utils import timezone
 from ask_me.models import *
 
 #To clean up Data base and generate fake data just write "python manage.py fake_generator

@@ -68,7 +68,7 @@
 
     <h2>Answers</h2> <br>
 
-    {% for answer in question.answers.get_answers_hot %}
+    {% for answer in answers %}
         <div class="masthead-lead">
             <div class="media">
 
@@ -122,4 +122,40 @@
         </div>
     </form>
 
+{% endblock %}
+
+{% block footer %}
+    <div class="container">
+          <ul class="pagination">
+              {% if answers.has_previous %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ answers.previous_page_number }}">Back</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ answers.previous_page_number }}">{{ answers.previous_page_number }}</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">Back</a>
+                  </li>
+              {% endif %}
+
+              <li class="page-item active">
+                  <a class="page-link" href="#">{{ answers.number }} <span class="sr-only">(current)</span></a>
+              </li>
+
+              {% if answers.has_next %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ answers.next_page_number }}">{{ answers.next_page_number }}</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ answers.next_page_number }}">Next</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#">Next</a>
+                  </li>
+              {% endif %}
+          </ul>
+    </div>
 {% endblock %}
