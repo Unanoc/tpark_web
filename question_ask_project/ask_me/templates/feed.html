@@ -7,9 +7,15 @@
 
 {% block headerName %}
         <h3>
-            {% for header in headers %}
-                <a class="{{ header.class }}" href="{% url header.url %}" >{{ header.title }}</a>
-            {% endfor %}
+            <ul class="nav nav-pills">
+                {% for header in headers %}
+                    {% if header.is_active %}
+                        <li class="active"><a href="{% url header.url %}" >{{ header.title }}</a></li>
+                    {% else %}
+                        <li><a href="{% url header.url %}" >{{ header.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         </h3>
 {% endblock %}
 
