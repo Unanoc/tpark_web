@@ -32,6 +32,6 @@ class TagManager(models.Manager):
         return self.filter(name=tag_name).first().questions.all().order_by('date').reverse()
 
 
+# TODO with AJAX
 class LikeManager(models.Manager):
-    #TODO
     pass

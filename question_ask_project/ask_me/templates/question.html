@@ -47,7 +47,9 @@
 
 
                 {% for tag in question.tags.all %}
-                    <button type="button" class="btn btn-danger btn-xs"><a href="{% url 'tag' tag.name %}">{{ tag.name }}</a></button>
+                    <a href="{% url 'tag' tag.name %}" style="text-decoration: none">
+                        <button type="button" class="btn btn-danger btn-xs">{{ tag.name }}</button>
+                    </a>
                 {% endfor %}
 
                 <div class="likes">

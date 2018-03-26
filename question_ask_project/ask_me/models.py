@@ -3,10 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
-
 from ask_me.managers import UserManager, TagManager, QuestionManager, AnswerManager, LikeManager
-
-
 
 
 # AUTH_USER_MODEL set in settings
@@ -21,8 +18,6 @@ class User(AbstractUser):
         return self.username
 
 
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=20, default="404", verbose_name="Question's Tag")
 
@@ -32,7 +27,7 @@ class Tag(models.Model):
         return self.name
 
 
-#TODO доделать
+# TODO with AJAX
 class Like(models.Model):
     user = models.ForeignKey(User, verbose_name="Like's Author")
     is_liked = models.BooleanField()
@@ -58,8 +53,6 @@ class Question(models.Model):
 
     def __str__(self):
         return self.text
-
-
 
 
 class Answer(models.Model):
