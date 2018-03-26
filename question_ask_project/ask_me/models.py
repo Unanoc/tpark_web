@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
-from ask_me.managers import *
+from ask_me.managers import UserManager, TagManager, QuestionManager, AnswerManager, LikeManager
 
 
 
@@ -29,10 +29,10 @@ class Tag(models.Model):
     objects = TagManager()
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
-
+#TODO доделать
 class Like(models.Model):
     user = models.ForeignKey(User, verbose_name="Like's Author")
     is_liked = models.BooleanField()
