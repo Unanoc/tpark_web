@@ -5,11 +5,16 @@
     <h2>New Question</h2>
 {% endblock %}
 
-{% block is_auth %}
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
-        <li><a href="{% url 'registration' %}"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
-    </ul>
+{% block messages %}
+    <div class="main">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    <p>{{ error|escape }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block content %}
@@ -17,20 +22,12 @@
         {% csrf_token %}
         <div class="col-md-12">
             <fieldset>
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" class="form-control" id="title">
-                </div>
 
-                <div class="form-group">
-                    <label for="text">Text:</label>
-                    <textarea name="text_block" cols="40" rows="13" id="text" class="form-control"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="tags">Tags:</label>
-                    <input type="text" class="form-control" id="tags">
-                </div>
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field }}
+                    </div>
+                {% endfor %}
 
                 <div class="form-group">
                     <input type="submit" value="ASK!" class="btn btn-success"/>

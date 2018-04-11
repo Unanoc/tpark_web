@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.template.loader import render_to_string
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
+from django.contrib.auth import authenticate, login, logout
+
 from ask_me.models import *
+from ask_me.forms import UserRegistrationForm, UserLoginForm, NewQuestionForm, UserSettingsForm
 
 
 def main(request):
@@ -40,22 +41,78 @@ def question(request, question_id):
 		raise Http404
 
 
-#TODO
-def login(request):
-	return HttpResponse(render_to_string('login.html'))
+def signup(request):
+	if request.method == 'POST':
+		form = UserRegistrationForm(request.POST, request.FILES)
+		if form.is_valid():
+			user = form.save()
+			user.set_password(form.cleaned_data['password'])
+			user.save()
+			login(request, user)
+			return redirect('/')
+	else:
+		form = UserRegistrationForm()
+		logout(request)
+	return render(request, 'signup.html', {'form': form})
 
-def logout(request):
-	return redirect('feed')
 
-def registration(request):
-	return HttpResponse(render_to_string('registration.html'))
+def signin(request):
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, user)
+			return redirect(request.GET.get('next') if request.GET.get('next') != '' else '/')
+	else:
+		form = UserLoginForm()
+		logout(request)
+	return render(request, 'signin.html', {'form': form})
 
-def new_ask(request):
-	return HttpResponse(render_to_string('new_question.html'))
+
+def signout(request):
+	if not request.user.is_authenticated:
+		raise Http404
+	logout(request)
+	return redirect(request.GET['from'])
+
+
+def new_question(request):
+	if not request.user.is_authenticated:
+		form = UserLoginForm()
+		return render(request, 'signin.html', {'form': form})
+
+	if request.method == 'POST':
+		form = NewQuestionForm(request.POST)
+		if form.is_valid():
+			question = form.save()
+			question.author = request.POST['author_id']
+			question.save()
+
+			for tagTitle in request.POST['tags'].split():
+				tag = Tag.objects.get_or_create(name=tagTitle)[0]
+				question.tags.add(tag)
+				question.save()
+			return question(request, question.id)
+	else:
+		form = NewQuestionForm()
+	return render(request, 'new_question.html', {'form': form})
+
 
 def settings(request):
-	return HttpResponse(render_to_string('settings.html'))
+	if request.method == 'POST':
+		form = UserSettingsForm(request.POST, request.FILES)
+		if form.is_valid():
+			for changedField in form.changed_data:
+				setattr(request.user, changedField, request.POST[changedField])
+			request.user.save()
+			return redirect('/')
+	else:
+		form = UserSettingsForm()
 
+		for i in form.base_fields:
+			form.base_fields[i].widget.attrs['placeholder'] = getattr(request.user, i)
+	return render(request, 'settings.html', {'form': form})
 
 
 def paginator(request, objects_list):

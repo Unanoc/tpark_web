@@ -2,13 +2,21 @@
 {% load static %}
 
 {% block headerName %}
-    <h1>Settings: W. Smith</h1>
+    <h3>Sign Up</h3>
 {% endblock %}
 
 {% block messages %}
     <div class="main">
         {% if form.non_field_errors %}
             {% for error in form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    <p>{{ error|escape }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.password.errors %}
+            {% for error in form.password.errors %}
                 <div class="alert alert-danger" role="alert">
                     <p>{{ error|escape }}</p>
                 </div>
@@ -27,7 +35,7 @@
 
 {% block content %}
     <div class="main">
-        <form class="form-horizontal" action="#" method="post">
+        <form enctype="multipart/form-data" class="form-horizontal" action="{% url 'signup' %}" method="post">
             {% csrf_token %}
             <div class="col-md-6">
                 <fieldset>
@@ -39,8 +47,9 @@
                     {% endfor %}
 
                     <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-success"/>
+                        <input type="submit" value="Register" class="btn btn-success"/>
                     </div>
+
                 </fieldset>
             </div>
         </form>

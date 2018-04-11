@@ -5,25 +5,6 @@
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
 {% endblock %}
 
-{% block is_auth %}
-    <ul class="navbar-form navbar-right">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <img class="avatar-on-nav" src="{% static 'src/dog.jpg' %}">
-                <span class="name-nav">
-                    W. Smith
-                </span>
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-              <li><a href="{% url 'settings' %}">Settings</a></li>
-              <li><a href="#">Sign out</a></li>
-            </ul>
-        </li>
-    </ul>
-{% endblock %}
-
 {% block content %}
     <div class="masthead-lead">
         <div class="media bor">

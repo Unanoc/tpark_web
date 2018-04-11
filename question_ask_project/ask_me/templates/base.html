@@ -37,8 +37,31 @@
                     </ul>
                 </ul>
 
-                {% block is_auth %} {% endblock %}
-                <ul class="navbar-form"><a href="{% url 'new_ask' %}"><button type="button" class="btn btn-success">ASK!</button></a></ul>
+                {% if user.is_authenticated %}
+                    <ul class="navbar-form navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <img class="avatar-on-nav" src="/media/{{ user.upload }}">
+                                <span class="name-nav">
+                                    {{ user.first_name }} {{ user.last_name }}
+                                </span>
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'settings' %}">Settings</a></li>
+                                <li><a href="/signout/?from={{ request.get_full_path }}">Sign out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'signin' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
+                        <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+                    </ul>
+                {% endif %}
+
+                <ul class="navbar-form"><a href="{% url 'new_question' %}"><button type="button" class="btn btn-success">ASK!</button></a></ul>
 
             </div>
         </div>
@@ -59,13 +82,9 @@
 
     <div class="container">
         <div class="col-12 col-md-10">
-            <!--<div class="main">-->
-                <!--{% for i in messages %}-->
-                    <!--<div class="alert alert-danger" role="alert">-->
-                        <!--<p>{{ i }}</p>-->
-                    <!--</div>-->
-                <!--{% endfor %}-->
-            <!--</div>-->
+            {% block messages %}
+            {% endblock %}
+
             {% block content %}
             {% endblock %}
         </div>

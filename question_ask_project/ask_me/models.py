@@ -47,7 +47,7 @@ class Question(models.Model):
     date = models.DateTimeField(default=timezone.now, verbose_name="Question's Date")
     rating = models.IntegerField(default=0, null=False, verbose_name="Question's Rating")
     is_active = models.BooleanField(default=True, verbose_name="Question's Availability")
-    tags = models.ManyToManyField(Tag, related_name='questions', blank=True, verbose_name="Question's Tags")
+    tags = models.ManyToManyField(Tag, related_name='questions', verbose_name="Question's Tags")
 
     objects = QuestionManager()
 
