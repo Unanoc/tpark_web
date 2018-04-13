@@ -85,18 +85,18 @@ def new_question(request):
 	if request.method == 'POST':
 		form = NewQuestionForm(request.POST)
 		if form.is_valid():
-			question = Question.objects.create(author=request.user,
+			ques = Question.objects.create(author=request.user,
 											   date=timezone.now(),
 											   is_active=True,
 											   title=form.cleaned_data['title'],
 											   text=form.cleaned_data['text'])
-			question.save()
+			ques.save()
 
 			for tagTitle in form.cleaned_data['tags'].split():
 				tag = Tag.objects.get_or_create(name=tagTitle)[0]
-				question.tags.add(tag)
-				question.save()
-			return question(request, question.id) #TODO
+				ques.tags.add(tag)
+				ques.save()
+			return question(request, ques.id)
 	else:
 		form = NewQuestionForm()
 	return render(request, 'new_question.html', {'form': form})
@@ -121,7 +121,7 @@ def new_answer(request, question_id):
 	else:
 		raise Http404
 
-
+#TODO добавить удаление постов
 #TODO добавить изменение пароля и аватарки и убрать переворот аватарки
 @login_required(login_url='/signin/')
 def settings(request):

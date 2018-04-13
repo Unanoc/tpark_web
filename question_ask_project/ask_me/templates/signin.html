@@ -5,18 +5,6 @@
     <h3>Sign In</h3>
 {% endblock %}
 
-{% block messages %}
-    <div class="main">
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endblock %}
-
 {% block content %}
     <div class="main">
         <h3>Sign in, please, or <a href="{% url 'signup' %}">register</a></h3> <br>

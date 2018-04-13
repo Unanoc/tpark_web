@@ -18,5 +18,3 @@ urlpatterns = [
     url(r'^ask/$', new_question, name='new_question'),
     url(r'^settings/$', settings, name='settings')
 ]
-
-#TODO добавить удаление постов

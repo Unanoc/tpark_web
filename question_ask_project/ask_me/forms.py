@@ -80,7 +80,7 @@ class UserLoginForm(forms.ModelForm):
         password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         if not user or not user.is_active:
-            raise ValidationError("Sorry, that login was invalid. Please try again.")
+            raise ValidationError("Sorry, that login or password is invalid. Please try again.")
         return self.cleaned_data
 
     class Meta:
@@ -114,7 +114,7 @@ class UserSettingsForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'upload']
+        fields = ['first_name', 'last_name', 'username', 'email'] # add upload when i found out how to update avatart
 
 
 
@@ -130,9 +130,18 @@ class NewQuestionForm(forms.ModelForm):
         'minlength': 5,
         'placeholder': 'Write your question here...'}))
 
-    tags = forms.CharField(validators=[text_validator],widget=forms.TextInput(attrs={
+    tags = forms.CharField(required=False, validators=[text_validator],widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'placeholder': 'List here tags by separating them with a ''space (the first 10 will be saved)'}))
+        'placeholder': 'List here tags by separating them with a space.'}))
+
+    def clean(self):
+        title = self.cleaned_data.get('title')
+        tags = self.cleaned_data.get('tags')
+        if len(str(title)) > 100:
+            raise ValidationError("Sorry, a title should contain no more than 100 characters. ")
+        if len(str(tags)) > 20:
+            raise ValidationError("Sorry, length of tags line must be no more than 20 characters.  ")
+        return self.cleaned_data
 
     class Meta:
         model = Question
@@ -148,4 +157,4 @@ class AnswerForm(forms.ModelForm):
 
     class Meta:
         model = Answer
-        fields = ('text',)
+        fields = ['text']

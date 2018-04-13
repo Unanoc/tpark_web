@@ -8,6 +8,7 @@
 {% block content %}
     <form class="form-horizontal" action="{% url 'new_question' %}" method="post">
         {% csrf_token %}
+
         <div class="col-md-12">
             <fieldset>
 
@@ -22,5 +23,6 @@
                 </div>
             </fieldset>
         </div>
+
     </form>
 {% endblock %}

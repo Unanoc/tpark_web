@@ -5,29 +5,9 @@
     <h1>Settings: W. Smith</h1>
 {% endblock %}
 
-{% block messages %}
-    <div class="main">
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if form.username.errors %}
-            {% for error in form.username.errors %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endblock %}
-
 {% block content %}
     <div class="main">
-        <form class="form-horizontal" action="#" method="post">
+        <form enctype="multipart/form-data" class="form-horizontal" action="{% url 'settings' %}" method="post">
             {% csrf_token %}
             <div class="col-md-6">
                 <fieldset>

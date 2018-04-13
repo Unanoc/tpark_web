@@ -5,34 +5,6 @@
     <h3>Sign Up</h3>
 {% endblock %}
 
-{% block messages %}
-    <div class="main">
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if form.password.errors %}
-            {% for error in form.password.errors %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if form.username.errors %}
-            {% for error in form.username.errors %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endblock %}
-
 {% block content %}
     <div class="main">
         <form enctype="multipart/form-data" class="form-horizontal" action="{% url 'signup' %}" method="post">
