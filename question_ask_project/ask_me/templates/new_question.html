@@ -5,20 +5,8 @@
     <h2>New Question</h2>
 {% endblock %}
 
-{% block messages %}
-    <div class="main">
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endblock %}
-
 {% block content %}
-    <form class="form-horizontal" action="#" method="post">
+    <form class="form-horizontal" action="{% url 'new_question' %}" method="post">
         {% csrf_token %}
         <div class="col-md-12">
             <fieldset>

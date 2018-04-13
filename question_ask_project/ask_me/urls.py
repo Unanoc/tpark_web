@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^hot/$', hot, name='hot'),
     url(r'^tag/(?P<tag>.*)/$', tag, name='tag'),
     url(r'^question/(?P<question_id>[0-9]+)/$', question, name='question'),
+    url(r'^question/(?P<question_id>[0-9]+)/answer/$', new_answer, name='new_answer'),
 
     url(r'^signin/$', signin, name='signin'),
     url(r'^signout/$', signout, name='signout'),
@@ -17,3 +18,5 @@ urlpatterns = [
     url(r'^ask/$', new_question, name='new_question'),
     url(r'^settings/$', settings, name='settings')
 ]
+
+#TODO добавить удаление постов

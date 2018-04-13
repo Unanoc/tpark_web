@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from ask_me.models import *
-from ask_me.forms import UserRegistrationForm, UserLoginForm, NewQuestionForm, UserSettingsForm
+from ask_me.forms import UserRegistrationForm, UserLoginForm, NewQuestionForm, UserSettingsForm, AnswerForm
 
 
 def main(request):
@@ -33,9 +34,9 @@ def tag(request, tag):
 
 
 def question(request, question_id):
-	question = Question.objects.get_by_id(int(question_id)).first()
-	answers = paginator(request, Answer.objects.get_answers_hot(question.id))
-	if question is not None:
+	if Question.objects.filter(id=question_id).exists():
+		question = Question.objects.get_by_id(int(question_id)).first()
+		answers = paginator(request, Answer.objects.get_answers_hot(question.id))
 		return render(request, 'question.html', {'question': question, 'answers': answers})
 	else:
 		raise Http404
@@ -57,13 +58,15 @@ def signup(request):
 
 
 def signin(request):
-	if request.method == 'POST':
-		username = request.POST['username']
-		password = request.POST['password']
-		user = authenticate(request, username=username, password=password)
-		if user is not None:
-			login(request, user)
-			return redirect(request.GET.get('next') if request.GET.get('next') != '' else '/')
+	if request.POST:
+		form = UserLoginForm(request.POST)
+		if form.is_valid():
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password']
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				login(request, user)
+				return redirect(request.GET.get('next') if request.GET.get('next') != '' else '/')
 	else:
 		form = UserLoginForm()
 		logout(request)
@@ -77,28 +80,50 @@ def signout(request):
 	return redirect(request.GET['from'])
 
 
+@login_required(login_url='/signin/')
 def new_question(request):
-	if not request.user.is_authenticated:
-		form = UserLoginForm()
-		return render(request, 'signin.html', {'form': form})
-
 	if request.method == 'POST':
 		form = NewQuestionForm(request.POST)
 		if form.is_valid():
-			question = form.save()
-			question.author = request.POST['author_id']
+			question = Question.objects.create(author=request.user,
+											   date=timezone.now(),
+											   is_active=True,
+											   title=form.cleaned_data['title'],
+											   text=form.cleaned_data['text'])
 			question.save()
 
-			for tagTitle in request.POST['tags'].split():
+			for tagTitle in form.cleaned_data['tags'].split():
 				tag = Tag.objects.get_or_create(name=tagTitle)[0]
 				question.tags.add(tag)
 				question.save()
-			return question(request, question.id)
+			return question(request, question.id) #TODO
 	else:
 		form = NewQuestionForm()
 	return render(request, 'new_question.html', {'form': form})
 
 
+@login_required(login_url='/signin/')
+def new_answer(request, question_id):
+	if Question.objects.filter(id=question_id).exists():
+		if request.method == 'POST':
+			form = AnswerForm(request.POST)
+			if form.is_valid():
+				answeredQuestion = Question.objects.get_by_id(question_id)[0]
+				answer = Answer.objects.create(author=request.user,
+												  date=timezone.now(),
+												  text=form.cleaned_data['text'],
+												  question_id=answeredQuestion.id)
+				answer.save()
+				return redirect(f'/question/{ question_id }/#{ answer.id }')
+		else:
+			form = AnswerForm()
+		return render(request, 'answer.html', {'form': form})
+	else:
+		raise Http404
+
+
+#TODO добавить изменение пароля и аватарки и убрать переворот аватарки
+@login_required(login_url='/signin/')
 def settings(request):
 	if request.method == 'POST':
 		form = UserSettingsForm(request.POST, request.FILES)

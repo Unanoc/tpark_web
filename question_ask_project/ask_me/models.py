@@ -8,7 +8,7 @@ from ask_me.managers import UserManager, TagManager, QuestionManager, AnswerMana
 
 # AUTH_USER_MODEL set in settings
 class User(AbstractUser):
-    upload = models.ImageField(default="src/default_avatar.png", upload_to="uploads/%Y/%m/%d/", verbose_name="User's Avatar")
+    upload = models.ImageField(default="default/default_avatar.png", upload_to="uploads/%Y/%m/%d/", verbose_name="User's Avatar")
     registration_date = models.DateTimeField(default=timezone.now, verbose_name="User's Registration Date")
     rating = models.IntegerField(default=0, verbose_name="User's Rating")
 
@@ -29,7 +29,7 @@ class Tag(models.Model):
 
 # TODO with AJAX
 class Like(models.Model):
-    user = models.ForeignKey(User, verbose_name="Like's Author")
+    user = models.ForeignKey(User, null=False, db_column="author", verbose_name="Like's Author")
     is_liked = models.BooleanField()
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()

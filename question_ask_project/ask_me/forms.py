@@ -1,6 +1,7 @@
 from django import forms
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
+from django.contrib.auth import authenticate
 
 from ask_me.models import User, Question, Answer
 
@@ -13,6 +14,7 @@ tags_validator = RegexValidator(r"[а-яА-Яa-zA-Z]",
 
 password_validator = RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$",
                                    "Password should contain minimum 8 characters, at least 1 letter and 1 number")
+
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -62,6 +64,7 @@ class UserRegistrationForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'username', 'email', 'upload']
 
 
+
 class UserLoginForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
@@ -72,33 +75,18 @@ class UserLoginForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Password'}))
 
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if not user or not user.is_active:
+            raise ValidationError("Sorry, that login was invalid. Please try again.")
+        return self.cleaned_data
 
-    #TODO clean
     class Meta:
         model = User
         fields = ['username', 'password']
 
-
-class NewQuestionForm(forms.ModelForm):
-    title = forms.CharField(validators=[text_validator],widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'maxlength': 100,
-        'minlength': 10,
-        'placeholder': 'Title'}))
-
-    text = forms.CharField(validators=[text_validator],widget=forms.Textarea(attrs={
-        'class': 'form-control',
-        'minlength': 30,
-        'placeholder': 'Write your question here...'}))
-
-    tags = forms.CharField(validators=[text_validator],widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'List here tags by separating them with a ''space (the first 10 will be saved)'}))
-
-    # TODO clean
-    class Meta:
-        model = Question
-        fields = ['title', 'text', 'tags']
 
 
 class UserSettingsForm(forms.ModelForm):
@@ -127,3 +115,37 @@ class UserSettingsForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'upload']
+
+
+
+class NewQuestionForm(forms.ModelForm):
+    title = forms.CharField(validators=[text_validator],widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'maxlength': 100,
+        'minlength': 5,
+        'placeholder': 'Title'}))
+
+    text = forms.CharField(validators=[text_validator],widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'minlength': 5,
+        'placeholder': 'Write your question here...'}))
+
+    tags = forms.CharField(validators=[text_validator],widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'List here tags by separating them with a ''space (the first 10 will be saved)'}))
+
+    class Meta:
+        model = Question
+        fields = ['title', 'text', 'tags']
+
+
+
+class AnswerForm(forms.ModelForm):
+    text = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'minlength': 1,
+        'placeholder': 'Write your answer here...'}))
+
+    class Meta:
+        model = Answer
+        fields = ('text',)
