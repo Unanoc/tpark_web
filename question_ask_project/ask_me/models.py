@@ -3,6 +3,11 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+import os
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from ask_me.rotate_avatar import rotate_image
 from ask_me.managers import UserManager, TagManager, QuestionManager, AnswerManager, LikeManager
 
 
@@ -16,6 +21,15 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+# auto-rotate avatar
+@receiver(post_save, sender=User, dispatch_uid="update_image_profile")
+def update_image(sender, instance, **kwargs):
+  if instance.upload:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    fullpath = BASE_DIR + instance.upload.url
+    rotate_image(fullpath)
+
 
 
 class Tag(models.Model):
