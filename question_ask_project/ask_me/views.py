@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
@@ -121,8 +121,9 @@ def new_answer(request, question_id):
 	else:
 		raise Http404
 
-#TODO добавить удаление постов
-#TODO добавить изменение пароля и аватарки и убрать переворот аватарки
+#TODO добавить изменение пароля
+#TODO Likes, Поиск по тегу
+
 @login_required(login_url='/signin/')
 def settings(request):
 	if request.method == 'POST':
@@ -173,3 +174,14 @@ def header_content(type, tag_name=""):
             {'title': 'Tag: ' + tag_name, 'url': 'feed', 'is_active': True},
         ]
     return content_header
+
+
+@login_required(login_url='/signin/')
+def delete_question(request):
+	if request.method == 'POST':
+		question_id = int(request.POST.get('question_id'))
+		question = Question.objects.get(id=question_id)
+		question.delete()
+		return redirect('/')
+	else:
+		raise Http404

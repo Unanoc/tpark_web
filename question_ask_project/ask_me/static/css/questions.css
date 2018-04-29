@@ -38,6 +38,10 @@
     font-size: 23px;
 }
 
+.delete-button {
+    float: right;
+}
+
 /* tags in question block */
 
 .btn-danger {

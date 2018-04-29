@@ -16,5 +16,9 @@ urlpatterns = [
     url(r'^signup/$', signup, name='signup'),
 
     url(r'^ask/$', new_question, name='new_question'),
-    url(r'^settings/$', settings, name='settings')
+    url(r'^settings/$', settings, name='settings'),
+
+    url(r'^question/delete/$', delete_question, name='delete_question')
+    # url(r'^deleteanswer/$', delete_answer, name='delete_answer'),
+
 ]

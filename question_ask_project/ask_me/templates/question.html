@@ -17,6 +17,18 @@
 
             <div class="media-body">
                 <a href="{% url 'question' question.id %}"><h4 class="media-heading">{{ question.title }}</h4></a>
+
+                {% if user.id == question.author.id%}
+                    <div class="delete-button">
+                        <form action="{% url 'delete_question' %}" method="post">
+                           {% csrf_token %}
+                            <input type="hidden" name="question_id" value="{{ question.id }}"/>
+                            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                        </form>
+                    </div>
+                {% endif %}
+
+
                 <small >
                     <i style="font-size: small; font-weight: bold">{{ question.author.first_name}} {{ question.author.last_name }}</i>
                     <i style="font-size: small">Posted {{ question.date }}</i>
