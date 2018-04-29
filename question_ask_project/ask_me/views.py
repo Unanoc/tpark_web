@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
@@ -122,7 +122,7 @@ def new_answer(request, question_id):
 		raise Http404
 
 #TODO добавить изменение пароля
-#TODO Likes, Поиск по тегу
+#TODO Likes
 
 @login_required(login_url='/signin/')
 def settings(request):
@@ -139,6 +139,39 @@ def settings(request):
 		for i in form.base_fields:
 			form.base_fields[i].widget.attrs['placeholder'] = getattr(request.user, i)
 	return render(request, 'settings.html', {'form': form})
+
+
+@login_required(login_url='/signin/')
+def delete_question(request):
+	if request.method == 'POST':
+		question_id = int(request.POST.get('question_id'))
+		question = Question.objects.get(id=question_id)
+		question.delete()
+		return redirect('/')
+	else:
+		raise Http404\
+
+
+@login_required(login_url='/signin/')
+def delete_answer(request):
+	if request.method == 'POST':
+		answer_id = int(request.POST.get('answer_id'))
+		answer = Answer.objects.get(id=answer_id)
+		answer.delete()
+		return redirect('/')
+	else:
+		raise Http404
+
+
+def search(request):
+	if request.method == 'GET' and 'tag' in request.GET:
+		tag_search = request.GET.get('tag')
+		try:
+			return tag(request, tag_search)
+		except AttributeError:
+			return redirect('/')
+	else:
+		raise Http404
 
 
 def paginator(request, objects_list):
@@ -174,14 +207,3 @@ def header_content(type, tag_name=""):
             {'title': 'Tag: ' + tag_name, 'url': 'feed', 'is_active': True},
         ]
     return content_header
-
-
-@login_required(login_url='/signin/')
-def delete_question(request):
-	if request.method == 'POST':
-		question_id = int(request.POST.get('question_id'))
-		question = Question.objects.get(id=question_id)
-		question.delete()
-		return redirect('/')
-	else:
-		raise Http404

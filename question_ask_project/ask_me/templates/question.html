@@ -28,19 +28,17 @@
                     </div>
                 {% endif %}
 
-
                 <small >
                     <i style="font-size: small; font-weight: bold">{{ question.author.first_name}} {{ question.author.last_name }}</i>
                     <i style="font-size: small">Posted {{ question.date }}</i>
                 </small>
                 <br><br>
 
-                <p class="content">{{ question.text }}</p>
-                <br>
+                <p class="content">{{ question.text }}</p> <br>
 
                 {% for tag in question.tags.all %}
                     <a href="{% url 'tag' tag.name %}" style="text-decoration: none">
-                        <button type="button" class="btn btn-danger btn-xs">{{ tag.name }}</button>
+                        <button type="button" class="btn btn-primary btn-xs">{{ tag.name }}</button>
                     </a>
                 {% endfor %}
 
@@ -57,7 +55,7 @@
 
         </div>
         <br>
-            <a href="/question/{{ question.id }}/answer/"><button type="button" class="btn btn-info">Answer!</button></a>
+            <a href="/question/{{ question.id }}/answer/"><button type="button" class="btn btn-info">ANSWER!</button></a>
         <br>
         <hr class="masthead-hr">
     </div>
@@ -70,11 +68,22 @@
 
                 <div class="media-left">
                     <a href="#">
-                        <img src="/media/{{ question.author.upload }}" class="avatar-on-post">
+                        <img src="/media/{{ answer.author.upload }}" class="avatar-on-post">
                     </a>
                 </div>
 
                 <div class="media-body">
+
+                    {% if user.id == answer.author.id%}
+                        <div class="delete-button">
+                            <form action="{% url 'delete_answer' %}" method="post">
+                               {% csrf_token %}
+                                <input type="hidden" name="answer_id" value="{{ answer.id }}"/>
+                                <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                            </form>
+                        </div>
+                    {% endif %}
+
                     <small >
                         <i style="font-size: small; font-weight: bold">{{ answer.author.first_name}} {{ answer.author.last_name }}</i>
                         <i style="font-size: small">Posted {{ answer.date }}</i>
@@ -97,7 +106,7 @@
             </div>
         </div>
 
-        <br><hr class="masthead-hr">
+        <hr class="masthead-hr">
     {% endfor %}
 {% endblock %}
 

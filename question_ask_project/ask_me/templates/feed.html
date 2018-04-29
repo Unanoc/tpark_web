@@ -44,7 +44,7 @@
 
                     {% for tag in question.tags.all %}
                         <a href="{% url 'tag' tag.name %}" style="text-decoration: none">
-                            <button type="button" class="btn btn-danger btn-xs">{{ tag.name }}</button>
+                            <button type="button" class="btn btn-primary btn-xs">{{ tag.name }}</button>
                         </a>
                     {% endfor %}
 

@@ -2,27 +2,48 @@ body {
     font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-
-/* For navbar */
-nav ul a .btn:hover {
+/* Colors of buttons */
+.btn:hover {
+    border-color: #1aab16;
     background-color: #1aab16;
 }
-nav .btn-success {
+.btn-success {
     border-color: #179814;
     background-color: #179814;
 }
-.input-group-addon{
+
+.btn-danger {
     background-color: #e71246;
-    border: #222;
+    border: 1px solid #e71246;
 }
-.glyphicon{
-    top: 0px;
-}
-.glyphicon-search:before {
-    padding-left: 1pt;
+.btn-danger:hover{
+    background-color: #b10e36;
+    border: 1px solid #b10e36;
 }
 
+.btn-primary {
+background-color: #333;
+border: 1px solid #333;
+}
+.btn-primary:hover {
+background-color: #1f1f1f;
+border: 1px solid #1f1f1f;
+}
 
+.btn-info {
+    background-color: #f0f0f0;
+    border: 1px solid #f0f0f0;
+    color: #000000;
+    font-weight: bolder;
+}
+.btn-info:hover {
+    background-color: #d4d4d4;
+    border: 1px solid #d4d4d4;
+    color: #000000;
+    font-weight: bolder;
+}
+
+/* For navbar */
 .text-on-nav {
     float: right;
     display: inline-block;

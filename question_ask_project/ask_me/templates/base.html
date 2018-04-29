@@ -25,15 +25,12 @@
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
-
                 <ul class="nav navbar-nav">
                     <ul class="navbar-form navbar-left">
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="search-icon glyphicon glyphicon-search"></i>
-                            </div>
-                            <input type="text" class="form-control search-query">
-                        </div>
+                        <form action="{% url 'search' %}" type="get" style="margin: 0">
+                            <input type="text" class="form-control search-query" name="tag" placeholder="Search for tag...">
+                            <button type="submit" class="btn btn-danger">Search</button>
+                        </form>
                     </ul>
                 </ul>
 
