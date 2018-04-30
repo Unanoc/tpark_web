@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^question/delete/$', delete_question, name='delete_question'),
     url(r'^answer/delete/$', delete_answer, name='delete_answer'),
 
-    url(r'^search/$', search, name='search')
+    url(r'^search/$', search, name='search'),
+    url(r'^(?P<username>[a-zA-Zа-яА-Я_\-\.0-9]+?)$', profile, name='profile')
 ]

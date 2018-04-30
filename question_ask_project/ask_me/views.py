@@ -125,6 +125,15 @@ def new_answer(request, question_id):
 #TODO Likes
 
 @login_required(login_url='/signin/')
+def profile(request, username):
+	user = User.objects.by_username(username)
+	if user is not None:
+		return render(request, 'profile.html', {'profile': user})
+	else:
+		raise Http404
+
+
+@login_required(login_url='/signin/')
 def settings(request):
 	if request.method == 'POST':
 		form = UserSettingsForm(request.POST, request.FILES)

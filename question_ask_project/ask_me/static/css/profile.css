@@ -1,0 +1,55 @@
+.avatar-block {
+    display: inline-block;
+    margin-left: 10%;
+}
+.profile-info-block {
+    display: inline-block;
+    margin-left: 15%;
+    margin-top: 10px;
+}
+.avatar {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+}
+
+.page-header{
+    margin: 40px 15px 0;
+}
+
+table{
+    width: 100%;
+}
+
+td{
+    width: 40%;
+    vertical-align: top;
+}
+
+th{
+    text-align: center;
+}
+
+.questions{
+    padding-right: 10px;
+}
+
+.answers{
+    padding-left: 10px;
+}
+
+.activity{
+    margin: 11px 0 0 0;
+}
+
+.table{
+    table-layout: fixed;
+    width: 100%;
+}
+.rate-icon{
+    height: 10px;
+}
+
+.rate{
+    float: right;
+}

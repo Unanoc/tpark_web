@@ -23,7 +23,7 @@ class Command(BaseCommand):
         faker = Faker()
 
         for i in range(1, count_users):
-            username = "User " + str(i)
+            username = "User" + str(i)
             user = User.objects.create_user(username=username, password=username)
             user.first_name = faker.first_name()
             user.last_name = faker.last_name()

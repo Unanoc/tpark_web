@@ -26,7 +26,7 @@
             <div class="media">
 
                 <div class="media-left">
-                    <a href="#">
+                    <a href="{% url 'profile' question.author.username %}">
                         <img src="/media/{{ question.author.upload }}" class="avatar-on-post">
                     </a> <br><br>
                 </div>

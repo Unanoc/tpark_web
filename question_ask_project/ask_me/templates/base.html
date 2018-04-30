@@ -50,6 +50,7 @@
                             </a>
 
                             <ul class="dropdown-menu">
+                                <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
                                 <li><a href="{% url 'settings' %}">Settings</a></li>
                                 <li><a href="/signout/?from={{ request.get_full_path }}">Sign out</a></li>
                             </ul>
