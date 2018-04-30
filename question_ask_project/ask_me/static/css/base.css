@@ -65,7 +65,15 @@ border: 1px solid #1f1f1f;
 .dropdown-toggle:hover {
     text-decoration: none;
 }
-
+.search-line {
+    margin: 0;
+    display: inline-block;
+    width: 70%;
+}
+.search-btn {
+    margin: 0;
+    display: inline-block;
+}
 
 /* For right-side menu */
 .popular h4{

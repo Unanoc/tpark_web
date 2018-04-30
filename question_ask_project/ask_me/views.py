@@ -121,7 +121,7 @@ def new_answer(request, question_id):
 	else:
 		raise Http404
 
-#TODO добавить изменение пароля
+#TODO добавить изменение пароля и изменение аватарки
 #TODO Likes
 
 @login_required(login_url='/signin/')
@@ -149,7 +149,7 @@ def delete_question(request):
 		question.delete()
 		return redirect('/')
 	else:
-		raise Http404\
+		raise Http404
 
 
 @login_required(login_url='/signin/')

@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^question/delete/$', delete_question, name='delete_question'),
     url(r'^answer/delete/$', delete_answer, name='delete_answer'),
 
-    url(r'^search/$', search, name='search'),
+    url(r'^search/$', search, name='search')
 ]
