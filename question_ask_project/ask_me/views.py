@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden as Http403
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -34,9 +34,9 @@ def tag(request, tag):
 
 
 def question(request, question_id):
-	if Question.objects.filter(id=question_id).exists():
-		question = Question.objects.get_by_id(int(question_id)).first()
-		answers = paginator(request, Answer.objects.get_answers_hot(question.id))
+	question = Question.objects.get_by_id(int(question_id)).first()
+	if question is not None:
+		answers = paginator(request, Answer.objects.get_hot_for_answer(question.id))
 		return render(request, 'question.html', {'question': question, 'answers': answers})
 	else:
 		raise Http404
@@ -58,7 +58,7 @@ def signup(request):
 
 
 def signin(request):
-	if request.POST:
+	if request.method == 'POST':
 		form = UserLoginForm(request.POST)
 		if form.is_valid():
 			username = form.cleaned_data['username']
@@ -121,8 +121,6 @@ def new_answer(request, question_id):
 	else:
 		raise Http404
 
-#TODO добавить изменение пароля и изменение аватарки
-#TODO Likes
 
 @login_required(login_url='/signin/')
 def profile(request, username):
@@ -135,18 +133,19 @@ def profile(request, username):
 
 @login_required(login_url='/signin/')
 def settings(request):
-	if request.method == 'POST':
-		form = UserSettingsForm(request.POST, request.FILES)
-		if form.is_valid():
-			for changedField in form.changed_data:
-				setattr(request.user, changedField, request.POST[changedField])
-			request.user.save()
-			return redirect('/')
-	else:
-		form = UserSettingsForm()
+	user = get_object_or_404(User, username=request.user)
 
-		for i in form.base_fields:
-			form.base_fields[i].widget.attrs['placeholder'] = getattr(request.user, i)
+	if request.method == 'POST':
+		form = UserSettingsForm(instance=user,
+                               data=request.POST,
+                               files=request.FILES
+                              )
+		if form.is_valid():
+			form.save()
+			return profile(request, user.username)
+	else:
+		form = UserSettingsForm(instance=user)
+
 	return render(request, 'settings.html', {'form': form})
 
 
@@ -155,6 +154,8 @@ def delete_question(request):
 	if request.method == 'POST':
 		question_id = int(request.POST.get('question_id'))
 		question = Question.objects.get(id=question_id)
+		if question.author.id != request.user.id:
+			raise Http403
 		question.delete()
 		return redirect('/')
 	else:
@@ -166,6 +167,8 @@ def delete_answer(request):
 	if request.method == 'POST':
 		answer_id = int(request.POST.get('answer_id'))
 		answer = Answer.objects.get(id=answer_id)
+		if answer.author.id != request.user.id:
+			raise Http403
 		answer.delete()
 		return redirect('/')
 	else:

@@ -22,10 +22,10 @@ class QuestionManager(models.Manager):
 
 class AnswerManager(models.Manager):
 
-    def get_answers_hot(self, question_id):
+    def get_hot_for_answer(self, question_id):
         return self.all().filter(question_id=question_id).order_by('rating').reverse()
 
-    def get_hot(self):
+    def get_all_hot(self):
         return self.all().order_by('rating').reverse()
 
 

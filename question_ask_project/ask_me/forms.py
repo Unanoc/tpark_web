@@ -112,9 +112,11 @@ class UserSettingsForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'E-mail'}))
 
+    upload = forms.ImageField()
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email'] # add upload when i found out how to update avatart
+        fields = ['first_name', 'last_name', 'username', 'email', 'upload']
 
 
 

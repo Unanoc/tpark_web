@@ -53,7 +53,7 @@
                     {% endfor %}
                 </td>
                 <td>
-                    {% for a in profile.answer_set.get_hot %}
+                    {% for a in profile.answer_set.get_all_hot %}
                         <div class="questions list-group">
                             <a href="/question/{{ a.question_id }}/#{{ a.id }}" class="list-group-item">
                                 <div class="rate">
