@@ -1,8 +1,11 @@
+import json
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import Http404, HttpResponseForbidden as Http403
+from django.http import Http404, HttpResponseForbidden as Http403, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views import View
 
 from ask_me.models import *
 from ask_me.forms import UserRegistrationForm, UserLoginForm, NewQuestionForm, UserSettingsForm, AnswerForm
@@ -184,6 +187,38 @@ def search(request):
 			return redirect('/')
 	else:
 		raise Http404
+
+
+class VotesView(View):
+	model = None  # Data Model - Articles or Comments
+	vote_type = None  # Vote type Like/Dislike
+
+	def post(self, request, pk):
+		obj = self.model.objects.get(pk=pk)
+		# GenericForeignKey does not support get_or_create
+		try:
+			likedislike = LikeDislike.objects.get(content_type=ContentType.objects.get_for_model(obj), object_id=obj.id,
+												  user=request.user)
+			if likedislike.vote is not self.vote_type:
+				likedislike.vote = self.vote_type
+				likedislike.save(update_fields=['vote'])
+				result = True
+			else:
+				likedislike.delete()
+				result = False
+		except LikeDislike.DoesNotExist:
+			obj.votes.create(user=request.user, vote=self.vote_type)
+			result = True
+
+		return HttpResponse(
+			json.dumps({
+				"result": result,
+				"like_count": obj.votes.likes().count(),
+				"dislike_count": obj.votes.dislikes().count(),
+				"sum_rating": obj.votes.sum_rating()
+			}),
+			content_type="application/json"
+		)
 
 
 def paginator(request, objects_list):

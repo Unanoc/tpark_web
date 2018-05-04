@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ask_me.models import Question, Tag, User, Answer, Like
+from ask_me.models import Question, Tag, User, Answer, LikeDislike
 
 # Register your models here.
 
@@ -10,4 +10,4 @@ admin.site.register(Question)
 admin.site.register(Tag)
 admin.site.register(User)
 admin.site.register(Answer)
-admin.site.register(Like)
+admin.site.register(LikeDislike)

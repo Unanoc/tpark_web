@@ -2,13 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 import os
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from PIL import Image, ExifTags
 
-from ask_me.managers import UserManager, TagManager, QuestionManager, AnswerManager, LikeManager
+from ask_me.managers import UserManager, TagManager, QuestionManager, AnswerManager, LikeDislikeManager
 
 
 # AUTH_USER_MODEL set in settings
@@ -60,14 +60,23 @@ class Tag(models.Model):
         return self.name
 
 
-# TODO with AJAX
-class Like(models.Model):
-    user = models.ForeignKey(User, null=False, db_column="author", verbose_name="Like's Author")
-    is_liked = models.BooleanField()
+class LikeDislike(models.Model):
+    LIKE = 1
+    DISLIKE = -1
+
+    VOTES = (
+        (DISLIKE, 'Dislike'),
+        (LIKE, 'Like')
+    )
+
+    vote = models.SmallIntegerField(verbose_name=("Vote"), choices=VOTES)
+    user = models.ForeignKey(User, verbose_name=("User"))
+
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    timestamp = models.DateTimeField(auto_now_add=True)
+    content_object = GenericForeignKey()
+
+    objects = LikeDislikeManager()
 
     def __str__(self):
         return self.user.username + " liked"
@@ -81,6 +90,7 @@ class Question(models.Model):
     rating = models.IntegerField(default=0, null=False, verbose_name="Question's Rating")
     is_active = models.BooleanField(default=True, verbose_name="Question's Availability")
     tags = models.ManyToManyField(Tag, default=True, related_name='questions', verbose_name="Question's Tags")
+    votes = GenericRelation(LikeDislike, related_query_name='questions')
 
     objects = QuestionManager()
 
@@ -94,6 +104,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, related_name='answers', verbose_name="Answer's Question")
     text = models.TextField(verbose_name="Answer's Content")
     rating = models.IntegerField(default=0, null=False, verbose_name="Answer's Rating")
+    votes = GenericRelation(LikeDislike, related_query_name='answers')
 
     objects = AnswerManager()
 

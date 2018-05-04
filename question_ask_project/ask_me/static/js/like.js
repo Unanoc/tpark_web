@@ -1,7 +1,6 @@
 'use strict';
 
-function like()
-{
+function like() {
 
     var like = $(this);
     var type = like.data('type');
@@ -25,8 +24,7 @@ function like()
     return false;
 }
 
-function dislike()
-{
+function dislike() {
     var dislike = $(this);
     var type = dislike.data('type');
     var pk = dislike.data('id');

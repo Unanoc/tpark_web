@@ -49,12 +49,14 @@
                     {% endfor %}
 
                     <div class="likes">
-                        <button type="button" class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-thumbs-up"></span> {{ question.rating }}
+                        <button type="button" class="btn btn-default btn-sm" data-id="{{ question.id }}" data-type="question" data-action="like" title="Like">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            <span data-count="like">{{ question.votes.likes.count }}</span>
                         </button>
 
-                        <button type="button" class=" btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-thumbs-down"></span> {{ question.rating }}
+                        <button type="button" class="btn btn-default btn-sm" data-id="{{ question.id }}" data-type="question" data-action="dislike" title="Dislike">
+                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                            <span data-count="dislike">{{ question.votes.dislikes.count }}</span>
                         </button>
                     </div>
               </div>
@@ -102,4 +104,8 @@
               {% endif %}
           </ul>
     </div>
+{% endblock %}
+
+{% block custom_javascript %}
+    <script src="{% static 'js/like.js' %}"></script>
 {% endblock %}
