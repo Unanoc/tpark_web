@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^answer/delete/$', delete_answer, name='delete_answer'),
 
     url(r'^search/$', search, name='search'),
-    url(r'^(?P<username>[a-zA-Zа-яА-Я_\-\.0-9]+?)$', profile, name='profile'),
+    url(r'^user/(?P<username>[a-zA-Zа-яА-Я_\-\.0-9]+?)$', profile, name='profile'),
 
     url(r'^api/question/(?P<pk>\d+)/like/$',
         login_required(VotesView.as_view(model=Question, vote_type=LikeDislike.LIKE)),
