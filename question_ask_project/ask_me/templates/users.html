@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block footer %}
-    {% if users %}
+    {% if users.has_next %}
         <div class="container">
             <ul class="pagination">
                 {% if users.has_previous %}

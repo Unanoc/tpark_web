@@ -39,14 +39,14 @@ def tag(request, tag):
 def question(request, question_id):
 	question = Question.objects.get_by_id(int(question_id)).first()
 	if question is not None:
-		answers = paginator(request, Answer.objects.get_hot_for_answer(question.id))
+		answers = paginator(request, objects_list=Answer.objects.get_hot_for_answer(question.id))
 		return render(request, 'question.html', {'question': question, 'answers': answers})
 	else:
 		raise Http404
 
 
 def users(request):
-	users = paginator(request, User.objects.all())
+	users = paginator(request, objects_list=User.objects.all())
 	return render(request, 'users.html', {'users': users})
 
 

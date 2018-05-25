@@ -70,7 +70,7 @@
 {% endblock %}
 
 {% block footer %}
-    {% if questions %}
+    {% if questions.has_next %}
         <div class="container">
             <ul class="pagination">
                 {% if questions.has_previous %}

@@ -116,7 +116,7 @@
 
 
 {% block footer %}
-    {% if answers %}
+    {% if answers.has_next %}
         <div class="container">
             <ul class="pagination">
                 {% if answers.has_previous %}
