@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <ul class="navbar-form navbar-left">
-                        <form action="{% url 'search' %}" type="get" style="margin: 0">
+                        <form action="{% url 'search' %}" type="get" style="margin: 0; margin-left: 15px">
                             <div class="search-line">
                                 <input type="text" class="form-control search-query" name="tag" placeholder="Search for tag...">
                             </div>
@@ -35,6 +35,9 @@
                                 <button type="submit" class="btn btn-danger">Search</button>
                             </div>
                         </form>
+                    </ul>
+                    <ul class="navbar-form navbar-left">
+                        <a href="{% url 'new_question' %}"><button type="button" class="btn btn-success">ASK!</button></a>
                     </ul>
                 </ul>
 
@@ -50,20 +53,25 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
-                                <li><a href="{% url 'settings' %}">Settings</a></li>
-                                <li><a href="/signout/?from={{ request.get_full_path }}">Sign out</a></li>
+                                <li><a href="{% url 'profile' user.username %}"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+                                <li><a href="{% url 'settings' %}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                                <li><a href="/signout/?from={{ request.get_full_path }}"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
                             </ul>
                         </li>
                     </ul>
                 {% else %}
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{% url 'signin' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
-                        <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+                        <li><a href="{% url 'signin' %}"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+                        <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-new-window"></span> Sign Up</a></li>
                     </ul>
                 {% endif %}
 
-                <ul class="navbar-form"><a href="{% url 'new_question' %}"><button type="button" class="btn btn-success">ASK!</button></a></ul>
+                <ul class="navbar-form">
+                    <a href="{% url 'users' %}">
+                        <span class="glyphicon glyphicon-user" style="font-size: 30px; color: white">
+                        </span>
+                    </a>
+                </ul>
 
             </div>
         </div>

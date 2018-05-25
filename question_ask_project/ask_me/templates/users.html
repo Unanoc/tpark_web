@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/questions.css' %}">
+{% endblock %}
+
+{% block headerName %}
+        <h3>People</h3>
+{% endblock %}
+
+{% block content %}
+
+    {% for user in users %}
+        <div class="media">
+            <div class="media-left">
+                    <a href="{% url 'profile' user.username %}">
+                        <img src="/media/{{ user.upload }}" class="avatar-on-post">
+                    </a>
+            </div>
+
+            <div class="media-body">
+                <h4 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h4>
+                <p><span class="glyphicon glyphicon-envelope"> {{ user.email }}</span></p>
+                <p><span class="glyphicon glyphicon-fire"> {{ user.rating }}</span></p>
+                <p><span class="glyphicon glyphicon-calendar"> {{ user.registration_date }}</span></p>
+            </div>
+        </div> <br>
+        <hr class="masthead-hr">
+    {% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+    {% if users %}
+        <div class="container">
+            <ul class="pagination">
+                {% if users.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.previous_page_number }}">Back</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.previous_page_number }}">{{ users.previous_page_number }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Back</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ users.number }} <span class="sr-only">(current)</span></a>
+                </li>
+
+                {% if users.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.next_page_number }}">{{ users.next_page_number }}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.next_page_number }}">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block custom_javascript %}
+    <script src="{% static 'js/like.js' %}"></script>
+{% endblock %}

@@ -45,6 +45,11 @@ def question(request, question_id):
 		raise Http404
 
 
+def users(request):
+	users = paginator(request, User.objects.all())
+	return render(request, 'users.html', {'users': users})
+
+
 def signup(request):
 	if request.method == 'POST':
 		form = UserRegistrationForm(request.POST, request.FILES)

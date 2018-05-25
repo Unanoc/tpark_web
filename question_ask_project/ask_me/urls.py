@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^tag/(?P<tag>.*)/$', tag, name='tag'),
     url(r'^question/(?P<question_id>[0-9]+)/$', question, name='question'),
     url(r'^question/(?P<question_id>[0-9]+)/answer/$', new_answer, name='new_answer'),
+    url(r'^users/$', users, name='users'),
 
     url(r'^signin/$', signin, name='signin'),
     url(r'^signout/$', signout, name='signout'),

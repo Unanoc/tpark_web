@@ -116,39 +116,41 @@
 
 
 {% block footer %}
-    <div class="container">
-          <ul class="pagination">
-              {% if answers.has_previous %}
-                  <li class="page-item">
-                      <a class="page-link" href="?page={{ answers.previous_page_number }}">Back</a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="?page={{ answers.previous_page_number }}">{{ answers.previous_page_number }}</a>
-                  </li>
-              {% else %}
-                  <li class="page-item disabled">
-                      <a class="page-link" href="#" tabindex="-1">Back</a>
-                  </li>
-              {% endif %}
+    {% if answers %}
+        <div class="container">
+            <ul class="pagination">
+                {% if answers.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ answers.previous_page_number }}">Back</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ answers.previous_page_number }}">{{ answers.previous_page_number }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Back</a>
+                    </li>
+                {% endif %}
 
-              <li class="page-item active">
-                  <a class="page-link" href="#">{{ answers.number }} <span class="sr-only">(current)</span></a>
-              </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ answers.number }} <span class="sr-only">(current)</span></a>
+                </li>
 
-              {% if answers.has_next %}
-                  <li class="page-item">
-                      <a class="page-link" href="?page={{ answers.next_page_number }}">{{ answers.next_page_number }}</a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="?page={{ answers.next_page_number }}">Next</a>
-                  </li>
-              {% else %}
-                  <li class="page-item disabled">
-                      <a class="page-link" href="#">Next</a>
-                  </li>
-              {% endif %}
-          </ul>
-    </div>
+                {% if answers.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ answers.next_page_number }}">{{ answers.next_page_number }}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ answers.next_page_number }}">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block custom_javascript %}
