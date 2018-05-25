@@ -125,7 +125,6 @@ def new_answer(request, question_id):
 		raise Http404
 
 
-@login_required(login_url='/signin/')
 def profile(request, username):
 	user = User.objects.by_username(username)
 	if user is not None:
@@ -150,6 +149,17 @@ def settings(request):
 		form = UserSettingsForm(instance=user)
 
 	return render(request, 'settings.html', {'form': form})
+
+
+@login_required(login_url='/signin/')
+def delete_user(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		user = User.objects.by_username(username)
+		user.delete()
+		return redirect('/')
+	else:
+		return render(request, 'delete_profile_confirmation.html')
 
 
 @login_required(login_url='/signin/')

@@ -112,8 +112,6 @@ class UserSettingsForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'E-mail'}))
 
-    upload = forms.ImageField()
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'upload']

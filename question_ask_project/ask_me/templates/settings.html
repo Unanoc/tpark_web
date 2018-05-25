@@ -3,19 +3,22 @@
 
 {% block headerName %}
     <h1>Settings: W. Smith</h1>
+    {% if user.is_authenticated %}
+        <span><a href="{% url 'delete_user' %}">Delete an account</a></span>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <div class="main">
+    <div>
         <form enctype="multipart/form-data" class="form-horizontal" action="{% url 'settings' %}" method="post">
             {% csrf_token %}
             <div class="col-md-6">
                 <fieldset>
 
                     {% for field in form %}
-                        <div class="form-group">
-                            {{ field }}
-                        </div>
+                    <div class="form-group">
+                        {{ field }}
+                    </div>
                     {% endfor %}
 
                     <div class="form-group">

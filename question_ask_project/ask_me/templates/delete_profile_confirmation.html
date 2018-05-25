@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block headerName %}
+    <h1>Account Deleting</h1>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h3>Are you sure you want to delete your account?</h3>
+        <form enctype="multipart/form-data" class="form-horizontal" action="{% url 'delete_user' %}" method="post">
+            {% csrf_token %}
+            <div class="col-md-6">
+                <fieldset>
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <div class="form-group">
+                        <input type="submit" value="Yes, I am sure!" class="btn btn-success"/>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+{% endblock %}
