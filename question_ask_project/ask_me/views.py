@@ -1,11 +1,10 @@
-import json
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, HttpResponseForbidden as Http403, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views import View
+import json
 
 from ask_me.models import *
 from ask_me.forms import UserRegistrationForm, UserLoginForm, NewQuestionForm, UserSettingsForm, AnswerForm
@@ -94,10 +93,10 @@ def new_question(request):
 		form = NewQuestionForm(request.POST)
 		if form.is_valid():
 			ques = Question.objects.create(author=request.user,
-											   date=timezone.now(),
-											   is_active=True,
-											   title=form.cleaned_data['title'],
-											   text=form.cleaned_data['text'])
+							date=timezone.now(),
+							is_active=True,
+							title=form.cleaned_data['title'],
+							text=form.cleaned_data['text'])
 			ques.save()
 
 			for tagTitle in form.cleaned_data['tags'].split():
@@ -118,9 +117,9 @@ def new_answer(request, question_id):
 			if form.is_valid():
 				answeredQuestion = Question.objects.get_by_id(question_id)[0]
 				answer = Answer.objects.create(author=request.user,
-												  date=timezone.now(),
-												  text=form.cleaned_data['text'],
-												  question_id=answeredQuestion.id)
+								date=timezone.now(),
+								text=form.cleaned_data['text'],
+								question_id=answeredQuestion.id)
 				answer.save()
 				return redirect('/question/{}/#{}'.format(question_id, answer.id))
 		else:
