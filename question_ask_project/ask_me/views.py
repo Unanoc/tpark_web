@@ -122,7 +122,7 @@ def new_answer(request, question_id):
 												  text=form.cleaned_data['text'],
 												  question_id=answeredQuestion.id)
 				answer.save()
-				return redirect(f'/question/{ question_id }/#{ answer.id }')
+				return redirect('/question/{ question_id }/#{ answer.id }')
 		else:
 			form = AnswerForm()
 		return render(request, 'answer.html', {'form': form})
