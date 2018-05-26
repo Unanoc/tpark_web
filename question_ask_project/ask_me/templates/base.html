@@ -128,7 +128,7 @@
                     <h4>Popular</h4>
                 </div> <hr>
                     {% for top_tag in top_tags %}
-                        <a class="tag{{ forloop.counter }}" href="#">{{ top_tag.name }}</a>
+                        <a class="tag{{ forloop.counter }}" href="{% url 'tag' top_tag.name %}">{{ top_tag.name }}</a>
                     {% endfor %}
             </div>
 
