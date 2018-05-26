@@ -1,7 +1,6 @@
 'use strict';
 
 function like() {
-
     var like = $(this);
     var type = like.data('type');
     var pk = like.data('id');
@@ -12,15 +11,13 @@ function like() {
         url : "/api/" + type +"/" + pk + "/" + action + "/",
         type : 'POST',
         data : { 'obj' : pk },
-
         success : function (json) {
             like.find("[data-count='like']").text(json.like_count);
             dislike.find("[data-count='dislike']").text(json.dislike_count);
-            dislike[0].textContent = json.dislike_count;
-            like[0].textContent = json.like_count;
+            like[0].text = "<span class=\"glyphicon glyphicon-thumbs-up\"></span>" + "<span data-count=\"like\">" + toString(json.like_count) + "</span>";
+            dislike[0].text = "<span class=\"glyphicon glyphicon-thumbs-down\"></span>" + "<span data-count=\"dislike\">" + toString(json.dislike_count) + "</span>";
         }
     });
-
     return false;
 }
 
@@ -37,10 +34,10 @@ function dislike() {
         data: {'obj': pk},
 
         success: function (json) {
-            dislike.find("[data-type='dislike']").text(json.dislike_count);
-            like.find("[data-type='like']").text(json.like_count);
-            dislike[0].textContent = json.dislike_count;
-            like[0].textContent = json.like_count;
+            like.find("[data-count='like']").text(json.like_count);
+            dislike.find("[data-count='dislike']").text(json.dislike_count);
+            dislike[0].text = "<span class=\"glyphicon glyphicon-thumbs-down\"></span>" + "<span data-count=\"dislike\">" + toString(json.dislike_count) + "</span>";
+            like[0].text = "<span class=\"glyphicon glyphicon-thumbs-up\"></span>" + "<span data-count=\"like\">" + toString(json.like_count) + "</span>";
         }
     });
 
@@ -64,7 +61,6 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// $('.js-like').on('click')
 // Настройка AJAX
 $(function () {
     $.ajaxSetup({

@@ -46,7 +46,7 @@ def question(request, question_id):
 
 
 def users(request):
-	users = paginator(request, objects_list=User.objects.all())
+	users = paginator(request, objects_list=User.objects.all().order_by('registration_date').reverse())
 	return render(request, 'users.html', {'users': users})
 
 
