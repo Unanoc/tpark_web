@@ -64,6 +64,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// $('.js-like').on('click')
 // Настройка AJAX
 $(function () {
     $.ajaxSetup({

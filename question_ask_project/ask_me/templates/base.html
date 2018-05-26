@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{% static 'src/icon.png' %}" type="image/png">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Ask me</title>
     {% block styles %}
     {% endblock %}
@@ -157,6 +155,9 @@
 
     {% block footer %}
     {% endblock %}
+
+    <script src="{% static 'jquery/jquery-latest.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
 
     {% block custom_javascript %}{% endblock %}
 </body>
