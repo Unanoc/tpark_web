@@ -1,12 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import UserManager
-from django.db.models import Sum
+from django.db.models import Sum, Count
 
 
 class UserManager(UserManager):
 
     def by_username(self, username):
         return self.all().filter(username=username).first()
+
+    def by_rating(self):
+        return self.order_by('-rating')
+
+    def by_first_name(self):
+        return self.order_by('first_name')
 
 
 class QuestionManager(models.Manager):
@@ -34,6 +40,9 @@ class TagManager(models.Manager):
 
     def get_by_tag(self, tag_name):
         return self.filter(name=tag_name).first().questions.all().order_by('date').reverse()
+
+    def hottest(self):
+        return self.annotate(question_count=Count('questions')).order_by('-question_count')
 
 
 class LikeDislikeManager(models.Manager):

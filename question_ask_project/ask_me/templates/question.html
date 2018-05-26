@@ -42,17 +42,19 @@
                     </a>
                 {% endfor %}
 
-                <div class="likes">
-                    <button type="button" class="btn btn-success btn-sm" data-id="{{ question.id }}" data-type="question" data-action="like" title="Like">
-                        <span class="glyphicon glyphicon-thumbs-up"></span>
-                        <span data-count="like">{{ question.votes.likes.count }}</span>
-                    </button>
+                {% if user.is_authenticated %}
+                    <div class="likes">
+                        <button type="button" class="btn btn-success btn-sm" data-id="{{ question.id }}" data-type="question" data-action="like" title="Like">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            <span data-count="like">{{ question.votes.likes.count }}</span>
+                        </button>
 
-                    <button type="button" class="btn btn-danger btn-sm" data-id="{{ question.id }}" data-type="question" data-action="dislike" title="Dislike">
-                        <span class="glyphicon glyphicon-thumbs-down"></span>
-                        <span data-count="dislike">{{ question.votes.dislikes.count }}</span>
-                    </button>
-                </div>
+                        <button type="button" class="btn btn-danger btn-sm" data-id="{{ question.id }}" data-type="question" data-action="dislike" title="Dislike">
+                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                            <span data-count="dislike">{{ question.votes.dislikes.count }}</span>
+                        </button>
+                    </div>
+                {% endif %}
             </div>
 
         </div>
@@ -95,17 +97,19 @@
                     <p class="content">{{ answer.text }}</p>
                     <br>
 
-                    <div class="likes">
-                        <button type="button" class="btn btn-success btn-sm" data-id="{{ answer.id }}" data-type="answer" data-action="like" title="Like">
-                            <span class="glyphicon glyphicon-thumbs-up"></span>
-                            <span data-count="like">{{ answer.votes.likes.count }}</span>
-                        </button>
+                    {% if user.is_authenticated %}
+                        <div class="likes">
+                            <button type="button" class="btn btn-success btn-sm" data-id="{{ answer.id }}" data-type="answer" data-action="like" title="Like">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>
+                                <span data-count="like">{{ answer.votes.likes.count }}</span>
+                            </button>
 
-                        <button type="button" class="btn btn-danger btn-sm" data-id="{{ answer.id }}" data-type="answer" data-action="dislike" title="Dislike">
-                            <span class="glyphicon glyphicon-thumbs-down"></span>
-                            <span data-count="dislike">{{ answer.votes.dislikes.count }}</span>
-                        </button>
-                    </div>
+                            <button type="button" class="btn btn-danger btn-sm" data-id="{{ answer.id }}" data-type="answer" data-action="dislike" title="Dislike">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>
+                                <span data-count="dislike">{{ answer.votes.dislikes.count }}</span>
+                            </button>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

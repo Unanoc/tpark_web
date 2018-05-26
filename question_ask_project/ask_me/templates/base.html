@@ -127,14 +127,9 @@
                 <div class="popular">
                     <h4>Popular</h4>
                 </div> <hr>
-                    <a class="tag1" href="#">Technopark</a>
-                    <a class="tag2" href="#">Perl</a>
-                    <a class="tag3" href="#">Django</a>
-                    <a class="tag6" href="#">C++</a>
-                    <a class="tag4" href="#">Linux</a>
-                    <a class="tag5" href="#">Algorithms</a>
-                    <a class="tag7" href="#">Go</a>
-                    <a class="tag8" href="#">Python</a>
+                    {% for top_tag in top_tags %}
+                        <a class="tag{{ forloop.counter }}" href="#">{{ top_tag.name }}</a>
+                    {% endfor %}
             </div>
 
             <div class="well well-sm">
@@ -142,13 +137,11 @@
                     <h4>Top People</h4>
                 </div> <hr>
 
-                <ul>
-                    <li><a class="peo" href="#">Paul Durov</a></li>
-                    <li><a class="peo" href="#">Mark Zuckerberg</a></li>
-                    <li><a class="peo" href="#">Vladimir Putin</a></li>
-                    <li><a class="peo" href="#">Will Smith</a></li>
-                    <li><a class="peo" href="#">Daniel Lee</a></li>
-                </ul>
+                {% for top_user in top_users %}
+                  <li class="list-group-item" style="text-align: center;">
+                    <a class="peo" href="{% url 'profile' top_user.username %}">{{ top_user.first_name }} {{ top_user.last_name }} <span class="glyphicon glyphicon-star"></span></a>
+                  </li>
+                {% endfor %}
             </div>
         </div>
     </div>

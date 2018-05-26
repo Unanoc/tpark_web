@@ -82,7 +82,15 @@ border: 1px solid #1f1f1f;
     font-weight: bold;
 }
 .peo {
-    color: #0f0f0f;
+    color: #ff134d;
+    font-size: 15px;
+    font-weight: bold;
+}
+.peo:hover {
+    color: #bb0e38;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
 }
 .tag1 {
     font-size: 11px;
@@ -122,16 +130,23 @@ border: 1px solid #1f1f1f;
     margin-left: 5px;
 }
 .tag7 {
-    font-size: 20px;
+    font-size: 13px;
     opacity: 0.9;
     color: #85253e;
     font-weight: bold;
     margin-left: 5px;
 }
 .tag8 {
-    font-size: 20px;
+    font-size: 25px;
     opacity: 0.9;
-    color: #85253e;
+    color: #2e676d;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.tag9 {
+    font-size: 15px;
+    opacity: 0.9;
+    color: #6d2f67;
     font-weight: bold;
     margin-left: 5px;
 }
