@@ -3,4 +3,12 @@ The first semester of Technopark@MailRu. WEB course. Question-answer site based 
 
 This is a simple web-site "AskMe" like "StackOverFlow".
 
-[Go to site](http://64.52.87.170)
+[GO TO SITE](http://64.52.87.170)
+
+
+## Development stack
+
+- Python + Django + WSGI
+- JavaScript
+- Nginx
+- HTML + CSS + BootStrap
