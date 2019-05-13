@@ -22,7 +22,7 @@ sudo apt-get install mysql-server mysql-client
 mysql -u root -p
 CREATE DATABASE ask_me DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 CREATE USER 'django'@'localhost' IDENTIFIED BY 'password like in config.cnf';
-GRANT ALL PRIVILEGES ON 'ask_me'.* TO 'django'@'localhost';
+GRANT ALL PRIVILEGES ON ask_me.* TO 'django'@'localhost';
 FLUSH PRIVILEGES;
 
 CTRL + D
