@@ -1,5 +1,5 @@
 # AskMe
-Web-site "AskMe" like "StackOverFlow".
+Website "AskMe" for questions, answers and discussions.
 
 # Development stack
 - Python + Django + WSGI
